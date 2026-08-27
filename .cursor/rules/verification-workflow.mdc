@@ -1,0 +1,30 @@
+---
+description: Fast, risk-based verification required after code changes
+alwaysApply: true
+---
+
+# Verification Workflow
+
+Verification is part of implementation and must finish before reporting completion.
+
+1. Review the final diff for accidental edits, incomplete paths, exposed secrets, duplicated logic, and changed requirements.
+2. Map each changed behavior to one success case, one boundary case, and one relevant failure case.
+3. Run checks from narrowest to broadest:
+   - syntax, diagnostics, or formatter for changed files;
+   - build the directly affected project;
+   - run its targeted tests;
+   - run broader solution checks only for shared or cross-project changes.
+4. Fix failures caused by the change and rerun the failed check plus the nearest regression check.
+5. Do not repeatedly restore dependencies or rebuild unrelated projects.
+6. Do not hide warnings, skip failing checks, weaken assertions, or change expected behavior merely to make verification pass.
+7. If no automated tests exist, perform a deterministic smoke test of the changed behavior. Add tests only when requested or when the project already has a test framework.
+8. Stop after all relevant checks pass; avoid speculative cleanup and unrelated optimization.
+
+# Completion Standard
+
+- The requested behavior is fully implemented with no placeholders.
+- Changed code builds or parses successfully.
+- Relevant success, boundary, and failure cases pass.
+- No new diagnostics, console errors, or unhandled exceptions remain.
+- Existing behavior outside the requested scope is preserved.
+- Report checks actually run and any check that could not run, including the concrete reason.

@@ -15,7 +15,7 @@ namespace BankAccount
             {
                 Console.WriteLine("Vælg hvilken handling du vil udføre:");
                 Console.WriteLine("0) Exit\n" + (canDeposit ? "1) Deposit\n" : "") + (canWithdraw ? "2) Withdraw\n" : "") + (canReadBalance ? "3) Check Balance\n" : ""));
-                string input = Console.ReadLine();
+                string input = Console.ReadLine() ?? string.Empty;
                 switch (input)
                 {
                     case "0":
@@ -91,7 +91,7 @@ namespace BankAccount
             }
         }
 
-        static decimal ParseDecimal(string input)
+        static decimal ParseDecimal(string? input)
         {
             decimal.TryParse(input, out decimal amount);
             return amount;

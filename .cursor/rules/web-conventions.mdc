@@ -1,0 +1,27 @@
+---
+description: HTML, CSS, and JavaScript conventions for static web exercises
+globs: "**/*.{html,css,js}"
+alwaysApply: false
+---
+
+# Static Web Conventions
+
+- Use semantic HTML, plain CSS, and vanilla JavaScript unless the project already uses another stack.
+- Use four-space indentation, camelCase JavaScript names, kebab-case CSS classes, `const` by default, and `let` only for reassignment.
+- Keep HTML structure, presentation, and behavior in their existing separate files.
+- Use `defer` for scripts that depend on the DOM, or initialize behavior after `DOMContentLoaded`.
+- Prefer `textContent` and DOM methods for untrusted data. Avoid injecting external values with `innerHTML`.
+- Check queried elements before using them when they may be absent from another page.
+- Wrap network requests in clear error handling, verify `response.ok`, and present useful loading, empty, and failure states.
+- Keep API keys and credentials out of client-side source code and version control.
+- Preserve each site's existing visual direction while keeping layouts responsive and keyboard accessible.
+- Use labels, meaningful alternative text, visible focus states, valid controls, and native elements before custom interactions.
+- Avoid frameworks, package managers, build tools, or external libraries unless the task requires them.
+
+# Web Verification
+
+1. Check the browser console for new errors and warnings on each affected page.
+2. Verify network success and failure behavior for API-driven pages.
+3. Exercise keyboard navigation and the changed interaction at narrow and wide viewport sizes.
+4. Check empty data, malformed data, missing elements, slow requests, and rejected requests when relevant.
+5. Validate that links, asset paths, forms, and responsive layouts still work on every affected page.

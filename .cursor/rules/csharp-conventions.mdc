@@ -1,0 +1,34 @@
+---
+description: C# and .NET conventions for the school console applications
+globs: "**/*.{cs,csproj,sln}"
+alwaysApply: false
+---
+
+# C# Conventions
+
+- Target .NET 8 unless the nearest project explicitly targets another version.
+- Keep nullable reference types and implicit usings enabled.
+- Use four-space indentation and Allman braces.
+- Use PascalCase for types and methods and camelCase for locals, parameters, and fields. Preserve a project's established property naming; use PascalCase for properties in new projects.
+- Use descriptive names and named constants instead of unexplained literals.
+- Keep `Program.cs` focused on startup, usually delegating to a `Setup()` or `SetupGame()` method, and move domain behavior into focused classes and methods.
+- Match the nearest project's namespace, folder organization, and Danish or English naming rather than mixing languages.
+- Prefer block-scoped namespaces in new projects; preserve an existing project's namespace style.
+- Prefer explicit access modifiers and the narrowest practical visibility.
+- Use modern C# when it improves clarity, but keep solutions understandable at the exercise's teaching level.
+- Use `TryParse` for user input and reject invalid or out-of-range values before changing state.
+- Respect nullable annotations. Do not return `null` from a non-nullable return type.
+- Catch exceptions only when the code can recover, add context, or provide a useful console message; never use empty catches.
+- Dispose streams, audio objects, and other `IDisposable` resources with `using`.
+- Separate console interaction, file/network I/O, and domain logic when doing so makes behavior testable.
+- Preserve assignment-specific error handling and text-file persistence patterns unless the requested change requires a safer approach.
+- Do not use `Thread.Sleep`, recursion for input retries, or global mutable state unless the exercise specifically requires it.
+- Do not add NuGet packages when the .NET standard library is sufficient.
+
+# C# Verification
+
+1. Build the nearest project with `dotnet build "<project>.csproj" --no-restore` after dependencies are available.
+2. If restore is required because project references or packages changed, run `dotnet restore` once and rebuild.
+3. Run the nearest automated tests when a test project exists.
+4. For changed logic without tests, exercise normal, invalid, empty, boundary, and failure paths with deterministic inputs where practical.
+5. Treat nullable warnings, compiler warnings caused by the change, unhandled exceptions, and incorrect state changes as failures.

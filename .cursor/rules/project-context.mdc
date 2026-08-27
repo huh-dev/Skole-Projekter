@@ -1,0 +1,30 @@
+---
+description: Repository context and working principles for all school projects
+alwaysApply: true
+---
+
+# Project Context
+
+- This repository contains independent school exercises. Work only in the project relevant to the request.
+- Preserve unrelated files, existing behavior, assignment constraints, and the educational level of the exercise.
+- Inspect the nearest project files before editing and follow their established language, naming, structure, and user-facing language.
+- Prefer the smallest complete solution. Do not introduce abstractions, dependencies, frameworks, or tooling without a concrete need.
+- Never expose secrets or add credentials to source control. Use configuration or environment variables when a task requires sensitive values.
+
+# Current Technology
+
+- C# console applications use .NET 8, SDK-style `.csproj` files, implicit usings, and nullable reference types.
+- Builds use `dotnet` and MSBuild through the nearest `.csproj` or `.sln`.
+- Existing NuGet dependencies are limited to NAudio and Microsoft.Extensions.DependencyInjection where already referenced.
+- Web exercises use semantic HTML, plain CSS, and vanilla JavaScript without Node.js, bundlers, or frontend frameworks.
+- REST data is consumed with the browser `fetch` API.
+- Do not assume empty `H2` or `GUI` directories have an established stack.
+
+# Implementation Workflow
+
+1. Identify the exact project and read its source and manifest before changing code.
+2. State a brief implementation plan for non-trivial work.
+3. Reuse nearby patterns while correcting clear defects instead of copying them.
+4. Make focused, complete edits without placeholders or unrelated cleanup.
+5. Validate inputs, nullable values, file operations, network failures, and relevant boundary cases.
+6. Run the narrowest useful checks first, then expand only when dependencies or shared files require it.

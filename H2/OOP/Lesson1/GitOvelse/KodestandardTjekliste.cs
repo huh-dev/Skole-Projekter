@@ -11,15 +11,9 @@
 // Underviserens facitliste findes i KodestandardTjekliste-FACIT.md i denne
 // mappe — kig IKKE i den, før du selv har lavet øvelsen færdig.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-class productCalculator
+class ProductCalculator
 {
-    const int maxQuantity = 100;
-    static List<string> items = new List<string>();
+    private static List<(string ItemName, decimal PricePerItem, int Quantity)> items = new List<(string, decimal, int)>();
 
     static void Main(string[] args)
     {
@@ -27,43 +21,52 @@ class productCalculator
         //Update so users can add more items after if needed
         bool addMoreItems = false;
         int iQuantity = 0;
+        decimal dPrice = 0;
         do
         {
             Console.WriteLine("Indtast et varenavn:");
-            string strItemName = Console.ReadLine();
+            string strItemName = Console.ReadLine() ?? string.Empty;
             Console.WriteLine("Indtast antal varer:");
-            string strQuantity = Console.ReadLine();
-            items.Add($"{strItemName} - {strQuantity}");
-            iQuantity += Convert.ToInt32(strQuantity);
+            string strQuantity = Console.ReadLine() ?? string.Empty;
+            int itemQuantity = Convert.ToInt32(strQuantity);
+            iQuantity += itemQuantity;
+            Console.WriteLine("Pris pr. vare:");
+            string strPrice = Console.ReadLine() ?? string.Empty;
+            dPrice = Convert.ToDecimal(strPrice);
+            items.Add((strItemName, dPrice, itemQuantity));
 
             Console.WriteLine("Vil du tilføje flere varer? (j/n)");
             string strAddMoreItems = Console.ReadLine() ?? string.Empty;
             addMoreItems = strAddMoreItems == "j" ? true : false;
         } while (addMoreItems);
 
-    
-
-        Console.WriteLine("Indtast pris pr. vare:");
-        string strPrice = Console.ReadLine();
-            decimal dPrice = Convert.ToDecimal(strPrice);
-
         // Sætter x til antal gange pris
-        decimal x = iQuantity * dPrice;
+        decimal x = items.Sum(item => item.PricePerItem * item.Quantity);
 
         if (x > 500)
         {
         decimal y = CalculateDiscount(x);
         decimal z = x - y;
-            Console.WriteLine("Rabat: " + Math.Round(y, 2));
-            Console.WriteLine("Items: " + string.Join(", ", items));
-            Console.WriteLine("Total: " + Math.Round(z, 2));
+        Console.WriteLine("Rabat: " + Math.Round(y, 2));
+        Console.WriteLine("Varer:");
+        foreach (var item in items)
+        {
+            Console.WriteLine($"- {item.ItemName}: {item.Quantity} stk. á {item.PricePerItem:C}");
         }
-        else {
+        Console.WriteLine("Total: " + Math.Round(z, 2));
+        }
+        else
+        {
             Console.WriteLine("Total: " + Math.Round(x, 2));
-            Console.WriteLine("Items: " + string.Join(", ", items));
+            Console.WriteLine("Varer:");
+            foreach (var item in items)
+            {
+                Console.WriteLine($"- {item.ItemName}: {item.Quantity} stk. á {item.PricePerItem:C}");
+            }
         }
+   
 
-        var message = calculate_Status(iQuantity);
+        string message = CalculateStatus(iQuantity);
         Console.WriteLine(message);
     }
 
@@ -76,7 +79,7 @@ class productCalculator
         return 0;
     }
 
-    static string calculate_Status(int Quantity)
+    static string CalculateStatus(int Quantity)
     {
         if (Quantity > 50)
         {
@@ -86,8 +89,8 @@ class productCalculator
     }
 }
 
-class customer
+class Customer
 {
-    public string name { get; set; }
-    public string Phone_Number { get; set; }
+    public string Name { get; set; }
+    public string PhoneNumber { get; set; }
 }

@@ -1,23 +1,46 @@
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\AnimalSounds.exe
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\AnimalSounds.deps.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\AnimalSounds.runtimeconfig.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\AnimalSounds.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\AnimalSounds.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.AssemblyInfoInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.AssemblyInfo.cs
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.csproj.CoreCompileInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.sourcelink.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\refint\AnimalSounds.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.genruntimeconfig.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\ref\AnimalSounds.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSounds.csproj.AssemblyReference.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.Asio.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.Core.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.Midi.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.Wasapi.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\bin\Debug\net8.0\NAudio.WinMM.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\animalsounds\obj\Debug\net8.0\AnimalSo.2B689DFD.Up2Date
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/AnimalSounds.exe
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/AnimalSounds.deps.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/AnimalSounds.runtimeconfig.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/AnimalSounds.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/AnimalSounds.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.AssemblyInfoInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.AssemblyInfo.cs
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.csproj.CoreCompileInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.sourcelink.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/refint/AnimalSounds.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.genruntimeconfig.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/ref/AnimalSounds.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSounds.csproj.AssemblyReference.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.Asio.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.Core.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.Midi.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.Wasapi.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/bin/Debug/net8.0/NAudio.WinMM.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/animalsounds/obj/Debug/net8.0/AnimalSo.2B689DFD.Up2Date
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/AnimalSounds
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/AnimalSounds.deps.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/AnimalSounds.runtimeconfig.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/AnimalSounds.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/AnimalSounds.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.Asio.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.Core.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.Midi.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.Wasapi.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/bin/Debug/net8.0/NAudio.WinMM.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.csproj.AssemblyReference.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.GeneratedMSBuildEditorConfig.editorconfig
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.AssemblyInfoInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.AssemblyInfo.cs
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.csproj.CoreCompileInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.sourcelink.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSo.2B689DFD.Up2Date
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/refint/AnimalSounds.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/AnimalSounds.genruntimeconfig.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/AnimalSounds/obj/Debug/net8.0/ref/AnimalSounds.dll

@@ -1,15 +1,30 @@
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\bin\Debug\net8.0\VehicleInspection.exe
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\bin\Debug\net8.0\VehicleInspection.deps.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\bin\Debug\net8.0\VehicleInspection.runtimeconfig.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\bin\Debug\net8.0\VehicleInspection.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\bin\Debug\net8.0\VehicleInspection.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.AssemblyInfoInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.AssemblyInfo.cs
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.csproj.CoreCompileInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.sourcelink.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\refint\VehicleInspection.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\VehicleInspection.genruntimeconfig.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\vehicleinspection\obj\Debug\net8.0\ref\VehicleInspection.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/bin/Debug/net8.0/VehicleInspection.exe
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/bin/Debug/net8.0/VehicleInspection.deps.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/bin/Debug/net8.0/VehicleInspection.runtimeconfig.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/bin/Debug/net8.0/VehicleInspection.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/bin/Debug/net8.0/VehicleInspection.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.AssemblyInfoInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.AssemblyInfo.cs
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.csproj.CoreCompileInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.sourcelink.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/refint/VehicleInspection.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/VehicleInspection.genruntimeconfig.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/vehicleinspection/obj/Debug/net8.0/ref/VehicleInspection.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/bin/Debug/net8.0/VehicleInspection
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/bin/Debug/net8.0/VehicleInspection.deps.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/bin/Debug/net8.0/VehicleInspection.runtimeconfig.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/bin/Debug/net8.0/VehicleInspection.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/bin/Debug/net8.0/VehicleInspection.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.GeneratedMSBuildEditorConfig.editorconfig
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.AssemblyInfoInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.AssemblyInfo.cs
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.csproj.CoreCompileInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.sourcelink.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/refint/VehicleInspection.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/VehicleInspection.genruntimeconfig.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/VehicleInspection/obj/Debug/net8.0/ref/VehicleInspection.dll

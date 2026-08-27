@@ -1,15 +1,30 @@
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\bin\Debug\net8.0\MyCollectionExamples.exe
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\bin\Debug\net8.0\MyCollectionExamples.deps.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\bin\Debug\net8.0\MyCollectionExamples.runtimeconfig.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\bin\Debug\net8.0\MyCollectionExamples.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\bin\Debug\net8.0\MyCollectionExamples.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.AssemblyInfoInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.AssemblyInfo.cs
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.csproj.CoreCompileInputs.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.sourcelink.json
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\refint\MyCollectionExamples.dll
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.pdb
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\MyCollectionExamples.genruntimeconfig.cache
-C:\Users\chris\Documents\GitHub\CSharp-Projekter\oop\uge 2\MyCollectionExamples\obj\Debug\net8.0\ref\MyCollectionExamples.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.exe
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.deps.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.runtimeconfig.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.AssemblyInfoInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.AssemblyInfo.cs
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.csproj.CoreCompileInputs.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.sourcelink.json
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/refint/MyCollectionExamples.dll
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.pdb
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.genruntimeconfig.cache
+C:/Users/chris/Documents/GitHub/CSharp-Projekter/oop/uge 2/MyCollectionExamples/obj/Debug/net8.0/ref/MyCollectionExamples.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.deps.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.runtimeconfig.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/bin/Debug/net8.0/MyCollectionExamples.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.GeneratedMSBuildEditorConfig.editorconfig
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.AssemblyInfoInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.AssemblyInfo.cs
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.csproj.CoreCompileInputs.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.sourcelink.json
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/refint/MyCollectionExamples.dll
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.pdb
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/MyCollectionExamples.genruntimeconfig.cache
+/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/MyCollectionExamples/obj/Debug/net8.0/ref/MyCollectionExamples.dll

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VehicleInspection")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9413262ea13f42050e39c7c0bb5ae552a1b8a90")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51ad20867682af19f257c8d7694a9ee4177100d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("VehicleInspection")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VehicleInspection")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

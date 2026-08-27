@@ -1,31 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\FileHandler.csproj": {}
+    "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/FileHandler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\FileHandler.csproj": {
+    "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/FileHandler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\FileHandler.csproj",
+        "projectUniqueName": "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/FileHandler.csproj",
         "projectName": "FileHandler",
-        "projectPath": "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\FileHandler.csproj",
-        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\obj\\",
+        "projectPath": "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/FileHandler.csproj",
+        "packagesPath": "/Users/christianbuchberg/.nuget/packages/",
+        "outputPath": "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/christianbuchberg/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -39,10 +38,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -55,12 +56,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

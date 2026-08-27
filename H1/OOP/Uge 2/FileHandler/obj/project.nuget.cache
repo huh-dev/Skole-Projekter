@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "z5VgLix3fXE=",
+  "dgSpecHash": "FPU9Duj8As8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\chris\\Documents\\GitHub\\CSharp-Projekter\\OOP\\Uge 2\\FileHandler\\FileHandler.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/christianbuchberg/Documents/Personlige Projekter/Skole-Projekter/H1/OOP/Uge 2/FileHandler/FileHandler.csproj",
+  "expectedPackageFiles": [
+    "/Users/christianbuchberg/.nuget/packages/microsoft.netcore.app.ref/8.0.30/microsoft.netcore.app.ref.8.0.30.nupkg.sha512",
+    "/Users/christianbuchberg/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.30/microsoft.aspnetcore.app.ref.8.0.30.nupkg.sha512",
+    "/Users/christianbuchberg/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.30/microsoft.netcore.app.host.osx-arm64.8.0.30.nupkg.sha512"
+  ],
   "logs": []
 }

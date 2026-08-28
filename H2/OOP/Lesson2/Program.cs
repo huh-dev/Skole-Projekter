@@ -18,7 +18,7 @@ namespace Lesson02.Library
             Book book1 = new Book("1984", "George Orwell", "9788711539329", 1949);
 
             // Objekt 2: bruger overload uden udgivelsesår
-            Book book2 = new Book("Fahrenheit 451", "Ray Bradbury", "9780345342966");
+            Book book2 = new Book("Fahrenheit 451", "Ray Bradbury");
 
             // Objekt 3: bruger den korteste overload (kun titel og forfatter)
             Book book3 = new Book("Kladdehæfte om løs kobling", "Ukendt Forfatter");

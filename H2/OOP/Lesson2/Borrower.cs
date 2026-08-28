@@ -36,7 +36,7 @@ namespace Lesson02.Library
 
         // Auto-property med kun get: et lånernummer må ALDRIG ændres,
         // efter objektet er oprettet. Det sættes udelukkende i konstruktøren.
-        public string BorrowerNumber { get; }
+        public string BorrowerNumber { get; private set; }
 
         // Auto-property med kun get udefra, men "private set" gør, at
         // klassen selv (i BorrowBook/ReturnBook) frit kan ændre værdien.

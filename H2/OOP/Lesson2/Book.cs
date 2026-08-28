@@ -42,17 +42,10 @@ namespace Lesson02.Library
         /// Overload: udgivelsesår kendes ikke endnu ved registrering.
         /// Bruger 0 som markør for "ukendt udgivelsesår".
         /// </summary>
-        public Book(string title, string author, string isbn)
-            : this(title, author, isbn, 0)
-        {
-        }
-
-        /// <summary>
-        /// Overload: hurtig registrering, kun titel og forfatter kendes.
-        /// </summary>
         public Book(string title, string author)
             : this(title, author, "ukendt", 0)
-        {
+        {   
+            _isOnLoan = false;
         }
 
         // ----- Properties -----
@@ -96,7 +89,7 @@ namespace Lesson02.Library
         // Den ændres udelukkende gennem metoderne CheckOut() og Return() nedenfor.
         // Det er selve pointen med indkapsling: vi garanterer, at status kun
         // ændres på en kontrolleret måde (fx kan man ikke udlåne samme bog to gange).
-        public bool IsOnLoan => _isOnLoan;
+        private bool IsOnLoan => _isOnLoan;
 
         // ----- Metoder (den kontrollerede adgang til at ændre tilstand) -----
 

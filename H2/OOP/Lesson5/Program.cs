@@ -1,25 +1,42 @@
-﻿namespace Lesson05;
+﻿using Lesson05.Interfaces;
+
+namespace Lesson05;
 
 class Program
 {
     static void Main(string[] args)
     {
-
-        List<Vehicle> vehicles = new List<Vehicle>();
+        // Vehicle (Koeretoej) kan ikke instantieres direkte, fordi klassen er abstract
+        // Vehicle koeretoej = new Vehicle("Generisk", "Model", "100"); // denne linje ville give compilerfejl
 
         Bil bil = new Bil("Toyota", "Corolla", "200");
         Motorcykel motorcykel = new Motorcykel("Honda", "CBR", "200");
-        vehicles.Add(bil);
-        vehicles.Add(motorcykel);
 
-        foreach (var vehicle in vehicles)
+        List<Vehicle> vehicles = new List<Vehicle> { bil, motorcykel };
+
+        Console.WriteLine("Polymorfi via basisklasse (Vehicle):");
+        foreach (Vehicle vehicle in vehicles)
         {
             vehicle.VisGrundInfo();
             Console.WriteLine($"Afgift: {vehicle.BeregnAfgift()} kr.");
+            Console.WriteLine();
         }
 
-        Console.WriteLine($"Forsikringspraemie: {bil.BeregnForsikringspraemie(10000)} kr.");
-        Console.WriteLine($"Lejepris: {bil.BeregnLejepris(10)} kr.");
-        Console.WriteLine($"Afgift: {bil.BeregnAfgift()} kr.");
+        List<IUdlejelig> udlejelige = new List<IUdlejelig> { bil, motorcykel };
+
+        Console.WriteLine("Polymorfi via interface (IUdlejelig):");
+        foreach (IUdlejelig udlejelig in udlejelige)
+        {
+            Console.WriteLine($"Lejepris for 10 dage: {udlejelig.BeregnLejepris(10)} kr.");
+        }
+
+        List<IForsikringspligtig> forsikringspligtige = new List<IForsikringspligtig> { bil };
+
+        Console.WriteLine();
+        Console.WriteLine("Polymorfi via interface (IForsikringspligtig):");
+        foreach (IForsikringspligtig forsikringspligtig in forsikringspligtige)
+        {
+            Console.WriteLine($"Forsikringspraemie: {forsikringspligtig.BeregnForsikringspraemie(10000)} kr.");
+        }
     }
 }

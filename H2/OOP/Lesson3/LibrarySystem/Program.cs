@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.IO;
+using LibrarySystem.Exceptions;
 
 namespace LibrarySystem;
 
@@ -125,7 +126,18 @@ class Program
         if (books.Count == 1)
         {
             Book book = books.FirstOrDefault()!;
-            library.BorrowBook(book);
+            try
+            {
+                library.BorrowBook(book);
+            }
+            catch (BookAlreadyBorrowedException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                return;
+            }
         }
         else if (books.Count > 1)
         {

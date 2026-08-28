@@ -1,3 +1,5 @@
+using LibrarySystem.Exceptions;
+
 namespace LibrarySystem;
 
 public class Library
@@ -23,8 +25,7 @@ public class Library
     {
         if (book.IsBorrowed)
         {
-            Console.WriteLine($"Book {book.Title} is already borrowed");
-            return;
+            throw new BookAlreadyBorrowedException();
         }
 
         book.IsBorrowed = true;

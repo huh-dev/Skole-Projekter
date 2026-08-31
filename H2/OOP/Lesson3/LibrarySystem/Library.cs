@@ -1,10 +1,19 @@
 using LibrarySystem.Exceptions;
+using System.Text.Json;
 
 namespace LibrarySystem;
 
 public class Library
 {
-    public List<Book> Books { get; set; }
+    private readonly List<Book> _books;
+
+    public Library()
+    {
+        string json = File.ReadAllText("books.json");
+        _books = JsonSerializer.Deserialize<List<Book>>(json) ?? new List<Book>();
+    }
+
+    public List<Book> Books => _books;
 
     public void ShowAllBooks()
     {
@@ -29,6 +38,7 @@ public class Library
         }
 
         book.IsBorrowed = true;
+        SaveBooks();
         Console.WriteLine($"Book {book.Title} borrowed successfully");
     }
 
@@ -41,11 +51,18 @@ public class Library
         }
 
         book.IsBorrowed = false;
+        SaveBooks();
         Console.WriteLine($"Book {book.Title} returned successfully");
     }
 
     public List<Book> SearchBook(string title)
     {
         return Books.Where(book => book.Title.ToLower().Contains(title.ToLower())).ToList();
+    }
+
+    private void SaveBooks()
+    {
+        string json = JsonSerializer.Serialize(Books, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText("books.json", json);
     }
 }

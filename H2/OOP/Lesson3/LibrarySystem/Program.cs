@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-using System.IO;
-using LibrarySystem.Exceptions;
+﻿using LibrarySystem.Exceptions;
 
 namespace LibrarySystem;
 
@@ -9,20 +7,8 @@ class Program
 
     static Library library = new Library();
 
-    static List<Book> LoadBooks()
-    {
-        string json = File.ReadAllText("books.json");
-        return JsonSerializer.Deserialize<List<Book>>(json) ?? new List<Book>();
-    }
-
     static void Main(string[] args)
     {
-        //Load books from JSON
-        List<Book> books = LoadBooks();
-
-        //Set books to library
-        library.Books = books;
-
         while (true)
         {
             Console.WriteLine("Welcome to the Library System");
@@ -106,83 +92,8 @@ class Program
         Console.WriteLine("--------------------------------");
         Console.WriteLine("Enter the title of the book: ");
 
-        string title;
-        try
-        {
-            title = Console.ReadLine();
-        }
-        catch (FormatException)
-        {
-            Console.WriteLine("Invalid title, please enter a valid title");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
-            return;
-        }
+        BookLogicComponent("borrow");
 
-
-        List<Book> books = library.SearchBook(title);
-
-        if (books.Count == 1)
-        {
-            Book book = books.FirstOrDefault()!;
-            try
-            {
-                library.BorrowBook(book);
-            }
-            catch (BookAlreadyBorrowedException e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
-                return;
-            }
-        }
-        else if (books.Count > 1)
-        {
-            Console.WriteLine("Multiple books found");
-            Console.WriteLine("--------------------------------");
-            foreach (Book b in books)
-            {
-                Console.WriteLine($"{b.Title} by {b.Author} (ISBN: {b.ISBN}) - {(b.IsBorrowed ? "Borrowed" : "Available")}");
-            }
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine("Enter the ISBN of the book you want to borrow: ");
-
-            string isbn;
-
-            try
-            {
-                isbn = Console.ReadLine();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid ISBN, please enter a valid ISBN");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
-                return;
-            }
-
-            Book book = books.FirstOrDefault(b => b.ISBN == isbn);
-
-            if (book == null)
-            {
-                Console.WriteLine("Book not found");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
-                return;
-            }
-
-            library.BorrowBook(book);
-        }
-        else
-        {
-            Console.WriteLine("Book not found");
-        }
-        
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         Console.Clear();
@@ -196,26 +107,29 @@ class Program
         Console.WriteLine("--------------------------------");
         Console.WriteLine("Enter the title of the book: ");
         
-        string title;
-        try
-        {
-            title = Console.ReadLine();
-        }
-        catch (FormatException)
+        BookLogicComponent("return");
+        
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+    }
+
+
+    static void BookLogicComponent(string type)
+    {
+        string? title = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(title))
         {
             Console.WriteLine("Invalid title, please enter a valid title");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            Console.Clear();
             return;
         }
 
-        List<Book> books = library.SearchBook(title);
-        
+        List<Book> books = library.SearchBook(title.Trim());
+        Book? book;
+
         if (books.Count == 1)
         {
-            Book book = books.FirstOrDefault()!;
-            library.ReturnBook(book);
+            book = books[0];
         }
         else if (books.Count > 1)
         {
@@ -223,43 +137,48 @@ class Program
             Console.WriteLine("--------------------------------");
             foreach (Book b in books)
             {
-                Console.WriteLine($"{b.Title} by {b.Author} (ISBN: {b.ISBN}) - {(b.IsBorrowed ? "Borrowed" : "Available")}");
+                Console.WriteLine(
+                    $"{b.Title} by {b.Author} (ISBN: {b.ISBN}) - {(b.IsBorrowed ? "Borrowed" : "Available")}");
             }
+
             Console.WriteLine("--------------------------------");
-            Console.WriteLine("Enter the ISBN of the book you want to return: ");
-            string isbn;
-            try
-            {
-                isbn = Console.ReadLine();
-            }
-            catch (FormatException)
+            string action = type == "borrow" ? "borrow" : "return";
+            Console.WriteLine($"Enter the ISBN of the book you want to {action}: ");
+
+            string? isbn = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(isbn))
             {
                 Console.WriteLine("Invalid ISBN, please enter a valid ISBN");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
                 return;
             }
 
-            Book book = books.FirstOrDefault(b => b.ISBN == isbn);
+            book = books.FirstOrDefault(b => b.ISBN == isbn.Trim());
             if (book == null)
             {
                 Console.WriteLine("Book not found");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                Console.Clear();
                 return;
             }
-            library.ReturnBook(book);
         }
         else
         {
             Console.WriteLine("Book not found");
+            return;
         }
-        
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
-        Console.Clear();
+
+        try
+        {
+            if (type == "return")
+            {
+                library.ReturnBook(book);
+            }
+            else if (type == "borrow")
+            {
+                library.BorrowBook(book);
+            }
+        }
+        catch (BookAlreadyBorrowedException e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
-  
 }

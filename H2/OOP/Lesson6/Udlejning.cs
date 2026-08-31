@@ -25,14 +25,12 @@ public class Udlejning
         Bil.SætUdlejet(false);
     }
 
+
+
     public string GenerérKvittering(string kundeNavn)
     {
-        return $"Kvittering for udlejning {Startdato} - {Slutdato} til {kundeNavn}. Pris: {BeregnPris()}";
-    }
-
-    public void SendKvittering(string kundeNavn)
-    {
-        string tekst = GenerérKvittering(kundeNavn);
+        string tekst = $"Kvittering sendt for udlejning {Startdato} - {Slutdato} til {kundeNavn}. Pris: {BeregnPris()}";
         _kvitteringsAfsender.SendKvittering(tekst);
+        return tekst;
     }
 }

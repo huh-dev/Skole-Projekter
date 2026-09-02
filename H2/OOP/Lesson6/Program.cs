@@ -2,62 +2,112 @@
 
 class Program
 {
+    static List<Bil> biler = new List<Bil>();
+    static List<Udlejning> udlejninger = new List<Udlejning>();
+
     static void Main(string[] args)
     {
-        Bil bil = new Bil
+        biler.Add(new Varevogn("1234567890", "Ford", "Focus", 10000, 299, 1000));
+        biler.Add(new Personbil("1234567891", "Toyota", "Corolla", 10000, 299, 2));
+        Kunde kunde = new Kunde("John Doe", "1234567890", 1234567890);
+        
+
+        while (true)
         {
-            Registreringsnummer = "AB12345",
-            Model = "Corolla",
-            Mærke = "Toyota",
-            Kilometerstand = 45000,
-            Dagspris = 500,
-            ErUdlejet = true
-        };
+            Console.WriteLine("\nVælg en mulighed:");
+            Console.WriteLine("1. Udlej bil");
+            Console.WriteLine("2. Tjek Ledighed");
+            Console.WriteLine("3. Afslut udlejning");
 
-        Kunde kunde = new Kunde
+            Console.Write("\nDit valg: ");
+            
+            int valg = 0;
+            try {
+                valg = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input, please enter a valid input");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+                continue;
+            }
+        
+            switch (valg)
+            {
+                case 1:
+                    UdlejBil(biler, kunde);
+                    break;
+                case 2:
+                    foreach (Bil bil in biler)
+                    {
+                        Console.WriteLine($"|==============================================|");
+                        Console.WriteLine($"Registreringsnummer: {bil.Registreringsnummer}");
+                        Console.WriteLine($"Mærke: {bil.Mærke}");
+                        Console.WriteLine($"Model: {bil.Model}");
+                        Console.WriteLine($"Kilometerstand: {bil.Kilometerstand}");
+                        Console.WriteLine($"Dagspris: {bil.Dagspris} kr.");
+                        Console.WriteLine(bil is Varevogn ? $"Lastevne: {((Varevogn)bil).LastevneKg} kg" : $"Antalsæder: {((Personbil)bil).AntalSæder}");
+                
+                        Console.WriteLine($"Status: {(bil.ErLedig() ? "Ledig" : "Udlejet")}");
+                        Console.WriteLine();
+                    }
+                    break;
+                case 3:
+                    AfslutUdlejning();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input, please enter a valid input");
+                    break;
+            }
+        }
+    }
+
+    private static void UdlejBil(List<Bil> biler, Kunde kunde)
+    {
+        Console.WriteLine("Indtast registreringsnummer: ");
+        string registreringsnummer = Console.ReadLine();
+        Bil bil = biler.FirstOrDefault(b => b.Registreringsnummer == registreringsnummer);
+        if (bil == null)
         {
-            Navn = "Anders Andersen",
-            Kørekortnummer = "1234567890",
-            Telefonnummer = 1234567890
-        };
-
-        Udlejning udlejning = new Udlejning(new EmailKvittering())
+            Console.WriteLine("Bil ikke fundet");
+            return;
+        }
+        if (!bil.ErLedig())
         {
-            Startdato = new DateTime(2026, 8, 25),
-            Slutdato = new DateTime(2026, 8, 31),
-            Bil = bil
-        };
+            Console.WriteLine("Bil er allerede udlejet");
+            return;
+        }
 
-        Udlejning udlejningSms = new Udlejning(new SmsKvittering())
+        Udlejning Nyudlejning = new Udlejning(kunde, bil, DateTime.Now, DateTime.Now.AddDays(1), new EmailKvittering());
+        udlejninger.Add(Nyudlejning);
+        Console.WriteLine($"Bil {bil.Registreringsnummer} er nu udlejet til {kunde.Navn} fra {Nyudlejning.Startdato} til {Nyudlejning.Slutdato}");
+        Console.WriteLine($"Pris: {Nyudlejning.BeregnPris()} kr.");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
+        Console.Clear();
+        return;
+    }
+
+    private static void AfslutUdlejning()
+    {
+        Console.WriteLine("Indtast registreringsnummer: ");
+        string registreringsnummer = Console.ReadLine();
+        Udlejning Nyudlejning = udlejninger.FirstOrDefault(u => u.Bil.Registreringsnummer == registreringsnummer);
+        if (Nyudlejning == null)
         {
-            Startdato = new DateTime(2026, 8, 25),
-            Slutdato = new DateTime(2026, 8, 31),
-            Bil = bil
-        };
-
-        Udlejning udlejningPrint = new Udlejning(new PrintKvittering())
+            Console.WriteLine("Bil ikke fundet");
+            return;
+        }
+        if (!Nyudlejning.Bil.ErLedig())
         {
-            Startdato = new DateTime(2026, 8, 25),
-            Slutdato = new DateTime(2026, 8, 31),
-            Bil = bil
-        };
-
-        // Afslut udlejningen
-        udlejning.Afslut(new DateTime(2026, 8, 31), 45000);
-        udlejningSms.Afslut(new DateTime(2026, 8, 31), 45000);
-        udlejningPrint.Afslut(new DateTime(2026, 8, 31), 45000);
-        Console.WriteLine($"Udlejningen er afsluttet. Pris: {udlejning.BeregnPris()}");
-        Console.WriteLine($"Udlejningen er afsluttet. Pris: {udlejningSms.BeregnPris()}");
-        Console.WriteLine($"Udlejningen er afsluttet. Pris: {udlejningPrint.BeregnPris()}");
-
-        // Generér kvittering Email, Sms eller Print
-        string kvitteringEmail = udlejning.GenerérKvittering(kunde.Navn);
-        Console.WriteLine(kvitteringEmail);
-
-        string kvitteringSms = udlejningSms.GenerérKvittering(kunde.Navn);
-        Console.WriteLine(kvitteringSms);
-
-        string kvitteringPrint = udlejningPrint.GenerérKvittering(kunde.Navn);
-        Console.WriteLine(kvitteringPrint);
+            Console.WriteLine("Bil er ikke udlejet");
+            return;
+        }
+        Nyudlejning.AfslutUdlejning();
+        udlejninger.Remove(Nyudlejning);
+        Console.WriteLine("Udlejning afsluttet");
+        return;
     }
 }

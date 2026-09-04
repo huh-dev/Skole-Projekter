@@ -1,13 +1,12 @@
 using Eventyrerlauget.Interfaces;
-
 namespace Eventyrerlauget.CharacterTypes;
 
-public class Wizard : Character, ISpellCaster
+public class Priest : Character, ISpellCaster
 {
     public int maxMana { get; private set; }
     public int currentMana { get; private set; }
 
-    public Wizard(string name, int level, int maxHp) : base(name, level, maxHp) {
+    public Priest(string name, int level, int maxHp) : base(name, level, maxHp) {
         maxMana = 100;
         currentMana = maxMana;
     }
@@ -16,7 +15,6 @@ public class Wizard : Character, ISpellCaster
     {
         target.TakeDamage(10);
     }
-
 
     public void CastSpell(IDamageable target, IDiceRoller diceRoller)
     {

@@ -1,4 +1,5 @@
 using Eventyrerlauget.Inventory;
+using Eventyrerlauget.Interfaces;
 
 namespace Eventyrerlauget;
 
@@ -17,9 +18,11 @@ public abstract class Character
         Level = level;
         MaxHp = maxHp;
         CurrentHp = maxHp;
+        Inventory = new Inventory.Inventory();
+        Equipment = new Dictionary<string, Item>();
     }
 
-    public abstract void Attack();
+    public abstract void Attack(IDamageable target);
 
     public void Heal(int amount)
     {

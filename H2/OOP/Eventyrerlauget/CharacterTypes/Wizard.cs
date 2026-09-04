@@ -12,9 +12,9 @@ public class Wizard : Character, ISpellCaster
         currentMana = maxMana;
     }
 
-    public override void Attack(IDamageable target)
+    public override void Attack(IDamageable target, IDiceRoller diceRoller)
     {
-        target.TakeDamage(10);
+        target.TakeDamage(diceRoller.RollDice(10));
     }
 
 

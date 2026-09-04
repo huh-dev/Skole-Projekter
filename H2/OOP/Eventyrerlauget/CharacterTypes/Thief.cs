@@ -12,8 +12,8 @@ public class Thief : Character, IDamageable
         CurrentHp = maxHp;
     }
 
-    public override void Attack(IDamageable target)
+    public override void Attack(IDamageable target, IDiceRoller diceRoller)
     {
-        target.TakeDamage(10);
+        target.TakeDamage(diceRoller.RollDice(10));
     }
 }

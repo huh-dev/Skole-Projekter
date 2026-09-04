@@ -22,7 +22,7 @@ public abstract class Character
         Equipment = new Dictionary<string, Item>();
     }
 
-    public abstract void Attack(IDamageable target);
+    public abstract void Attack(IDamageable target, IDiceRoller diceRoller);
 
     public void Heal(int amount)
     {

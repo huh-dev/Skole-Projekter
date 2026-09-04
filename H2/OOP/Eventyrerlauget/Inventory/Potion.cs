@@ -1,14 +1,12 @@
+using Eventyrerlauget.Interfaces;
 namespace Eventyrerlauget.Inventory;
 
-
-
-//NIKOLAI kig lige din bums <3 den skal ikke være idamageable tror vi under drink method
 public class Potion : Item
 {
 
-    public void Drink(Character target)
+    public void Drink(Character target, IDiceRoller diceRoller)
     {
-        target.Heal(10);
+        target.Heal(diceRoller.RollDice(10));
     }
 
 }

@@ -1,3 +1,5 @@
+using Eventyrerlauget.Inventory;
+
 namespace Eventyrerlauget;
 
 public abstract class Character
@@ -6,6 +8,8 @@ public abstract class Character
     public int Level { get; private set; }
     public int MaxHp { get; private set; }
     public int CurrentHp { get; private set; }
+    public Inventory.Inventory Inventory { get; private set; }
+    public Dictionary<string, Item> Equipment { get; set; }
 
     public Character(string name, int level, int maxHp)
     {

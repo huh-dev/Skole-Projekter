@@ -89,7 +89,15 @@ public class Program
     private static void TakePlayerTurn(Character member, Party party, Monster monster, IDiceRoller dice)
     {
         bool canCast = member is ISpellCaster;
-        Console.WriteLine($"\n{member.Name} ({member.GetType().Name}) HP {member.CurrentHp}/{member.MaxHp}");
+        
+        string mana = string.Empty;
+
+        if (member is ISpellCaster cast)
+        {
+            mana = $" Mana {cast.currentMana}/{cast.maxMana}";
+        }
+        
+        Console.WriteLine($"\n{member.Name} ({member.GetType().Name}) HP {member.CurrentHp}/{member.MaxHp}{mana}");
         Console.WriteLine(canCast ? "1) Attack  2) Cast spell" : "1) Attack");
         int action = ReadInt("Action: ", 1, canCast ? 2 : 1);
 
@@ -163,7 +171,14 @@ public class Program
         foreach (Character member in party.Members)
         {
             string state = member.CurrentHp <= 0 ? " (down)" : "";
-            Console.WriteLine($"- {member.Name} ({member.GetType().Name}) HP {member.CurrentHp}/{member.MaxHp}{state}");
+            string mana = string.Empty;
+
+            if (member is ISpellCaster caster)
+            {
+                mana = $" Mana {caster.currentMana}/{caster.maxMana}";
+            }
+            
+            Console.WriteLine($"- {member.Name} ({member.GetType().Name}) HP {member.CurrentHp}/{member.MaxHp}{mana}{state}");
         }
     }
 

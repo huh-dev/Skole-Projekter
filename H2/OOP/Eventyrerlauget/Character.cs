@@ -12,7 +12,7 @@ public abstract class Character
     public Inventory.Inventory Inventory { get; private set; }
     public Dictionary<string, Item> Equipment { get; set; }
 
-    public Character(string name, int level, int maxHp)
+    public Character(string name, int level, int maxHp, Weapon? weapon = null, Armor? armor = null)
     {
         Name = name;
         Level = level;
@@ -20,6 +20,8 @@ public abstract class Character
         CurrentHp = maxHp;
         Inventory = new Inventory.Inventory();
         Equipment = new Dictionary<string, Item>();
+        Equipment.TryAdd("weapon", weapon);
+        Equipment.TryAdd("armor", armor);
     }
 
     public abstract void Attack(IDamageable target, IDiceRoller diceRoller)

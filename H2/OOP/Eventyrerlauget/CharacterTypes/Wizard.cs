@@ -23,6 +23,12 @@ public class Wizard : Character, ISpellCaster
         }
 
         currentMana -= 15;
-        target.TakeDamage(diceRoller.RollDice(10));
+        
+        int attackRole = diceRoller.RollDice(20);
+
+        if (attackRole >= target.ArmorClass())
+        {
+            target.TakeDamage(diceRoller.RollDice(10));
+        }
     }
 }

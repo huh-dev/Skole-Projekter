@@ -14,6 +14,20 @@ public class Thief : Character, IDamageable
 
     public override void Attack(IDamageable target, IDiceRoller diceRoller)
     {
-        target.TakeDamage(diceRoller.RollDice(10));
+        bool isSneakAttack = diceRoller.RollDice(20) > 15;
+        
+        int attackRole = diceRoller.RollDice(20);
+
+        if (attackRole >= target.ArmorClass())
+        {
+            var damageDone = diceRoller.RollDice(WeaponDamage());
+
+            if (isSneakAttack)
+            {
+                damageDone *= 2;
+            }
+
+            target.TakeDamage(damageDone);
+        }
     }
 }

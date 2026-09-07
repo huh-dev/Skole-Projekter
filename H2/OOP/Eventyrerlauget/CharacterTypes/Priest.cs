@@ -11,11 +11,6 @@ public class Priest : Character, ISpellCaster
         currentMana = maxMana;
     }
 
-    public override void Attack(IDamageable target, IDiceRoller diceRoller)
-    {
-        target.TakeDamage(diceRoller.RollDice(10));
-    }
-
     public void CastSpell(IDamageable target, IDiceRoller diceRoller)
     {
 

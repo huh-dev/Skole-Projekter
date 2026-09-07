@@ -22,7 +22,15 @@ public abstract class Character
         Equipment = new Dictionary<string, Item>();
     }
 
-    public abstract void Attack(IDamageable target, IDiceRoller diceRoller);
+    public abstract void Attack(IDamageable target, IDiceRoller diceRoller)
+    {
+        int attackRole = diceRoller.RollDice(20);
+
+        if (attackRole >= target.ArmorClass())
+        {
+            target.TakeDamage(diceRoller.RollDice(WeaponDamage()))
+        }
+    }
 
     public void Heal(int amount)
     {
@@ -43,5 +51,18 @@ public abstract class Character
             CurrentHp = 0;
         }
     }
-    
+
+    public int ArmorClass()
+    {
+        Equipment.TryGetValue("armor",  out int armorClass);
+
+        return armorClass ?? 10;
+    }
+
+    private int WeaponDamage()
+    {
+        Equipment.TryGetValue("weapon", out int weaponDamage);
+
+        return weaponDamage ?? 6;
+    }
 }

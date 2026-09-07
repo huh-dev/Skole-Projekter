@@ -19,6 +19,16 @@ public class Monster : IDamageable
         MaxHp = maxHp;
         CurrentHp = maxHp;
     }
+    
+    public void Attack(IDamageable target, IDiceRoller diceRoller)
+    {
+        int attackRole = diceRoller.RollDice(20);
+
+        if (attackRole >= target.ArmorClass())
+        {
+            target.TakeDamage(diceRoller.RollDice(Damage))
+        }
+    }
 
     public void TakeDamage(int amount)
     {
@@ -36,5 +46,10 @@ public class Monster : IDamageable
         {
             CurrentHp = MaxHp;
         }
+    }
+
+    public void ArmorClass()
+    {
+        return armorClass;
     }
 }

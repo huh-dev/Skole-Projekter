@@ -14,9 +14,4 @@ public class Warrior : Character, IDamageable
         MaxHp = maxHp;
         CurrentHp = maxHp;
     }
-
-    public override void Attack(IDamageable target, IDiceRoller diceRoller)
-    {
-        target.TakeDamage(diceRoller.RollDice(10));
-    }
 }

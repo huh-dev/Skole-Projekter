@@ -20,6 +20,11 @@ public class Monster : IDamageable
         CurrentHp = maxHp;
     }
 
+    public void Attack(IDamageable target, IDiceRoller diceRoller)
+    {
+        target.TakeDamage(diceRoller.RollDice(10));
+    }
+
     public void TakeDamage(int amount)
     {
         CurrentHp -= amount;

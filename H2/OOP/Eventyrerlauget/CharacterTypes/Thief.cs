@@ -7,7 +7,8 @@ public class Thief : Character, IDamageable
     public int MaxHp { get; private set; }
     public int CurrentHp { get; private set; }
 
-    public Thief(string name, int level, int maxHp) : base(name, level, maxHp) {
+    public Thief(string name, int level, int maxHp, Weapon? weapon = null, Armor? armor = null) 
+        : base(name, level, maxHp, weapon, armor) {
         MaxHp = maxHp;
         CurrentHp = maxHp;
     }

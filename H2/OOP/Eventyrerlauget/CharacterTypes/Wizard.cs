@@ -7,7 +7,8 @@ public class Wizard : Character, ISpellCaster
     public int maxMana { get; private set; }
     public int currentMana { get; private set; }
 
-    public Wizard(string name, int level, int maxHp) : base(name, level, maxHp) {
+    public Wizard(string name, int level, int maxHp, Weapon? weapon = null, Armor? armor = null) 
+        : base(name, level, maxHp, weapon, armor) {
         maxMana = 100;
         currentMana = maxMana;
     }

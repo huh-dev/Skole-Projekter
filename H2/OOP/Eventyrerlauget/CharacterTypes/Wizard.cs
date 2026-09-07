@@ -20,6 +20,14 @@ public class Wizard : Character, ISpellCaster
 
     public void CastSpell(IDamageable target, IDiceRoller diceRoller)
     {
+        
+        if (currentMana < 15)
+        {
+            Console.WriteLine("Not enough mana to cast spell");
+            return;
+        }
+
+        currentMana -= 15;
         target.TakeDamage(diceRoller.RollDice(10));
     }
 }

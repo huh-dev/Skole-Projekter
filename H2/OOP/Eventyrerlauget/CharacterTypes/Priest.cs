@@ -18,6 +18,15 @@ public class Priest : Character, ISpellCaster
 
     public void CastSpell(IDamageable target, IDiceRoller diceRoller)
     {
-        target.TakeDamage(diceRoller.RollDice(10));
+
+        if (currentMana < 15)
+        {
+            Console.WriteLine("Not enough mana to cast spell");
+            return;
+        }
+
+        currentMana -= 15;
+
+        target.Heal(diceRoller.RollDice(10));
     }
 }

@@ -56,15 +56,19 @@ public abstract class Character
 
     public int ArmorClass()
     {
-        Equipment.TryGetValue("armor",  out int armorClass);
+        Equipment.TryGetValue("armor",  out Item armor);
 
-        return armorClass ?? 10;
+        Armor castArmor = armor as Armor;
+        
+        return castArmor.armorClass ?? 10;
     }
 
     private int WeaponDamage()
     {
-        Equipment.TryGetValue("weapon", out int weaponDamage);
+        Equipment.TryGetValue("weapon", out Item weapon);
 
-        return weaponDamage ?? 6;
+        Weapon castWeapon = weapon as Weapon;
+        
+        return castWeapon.damage ?? 6;
     }
 }

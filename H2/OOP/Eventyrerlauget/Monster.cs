@@ -7,15 +7,15 @@ public class Monster : IDamageable
 
     public string Name { get; private set; }
     public int Damage { get; private set; }
-    public int ArmorClass { get; private set; }
+    public int armorClass { get; private set; }
     public int MaxHp { get; private set; }
     public int CurrentHp { get; private set; }
 
-    public Monster(string name, int damage, int armorClass, int maxHp)
+    public Monster(string name, int damage, int _armorClass, int maxHp)
     {
         Name = name;
         Damage = damage;
-        ArmorClass = armorClass;
+        armorClass = _armorClass;
         MaxHp = maxHp;
         CurrentHp = maxHp;
     }
@@ -26,7 +26,7 @@ public class Monster : IDamageable
 
         if (attackRole >= target.ArmorClass())
         {
-            target.TakeDamage(diceRoller.RollDice(Damage))
+            target.TakeDamage(diceRoller.RollDice(Damage));
         }
     }
 
@@ -48,7 +48,7 @@ public class Monster : IDamageable
         }
     }
 
-    public void ArmorClass()
+    public int ArmorClass()
     {
         return armorClass;
     }

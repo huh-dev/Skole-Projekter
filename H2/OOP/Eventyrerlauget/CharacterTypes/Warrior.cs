@@ -1,5 +1,5 @@
 using Eventyrerlauget.Interfaces;
-
+using Eventyrerlauget.Inventory;
 namespace Eventyrerlauget.CharacterTypes;
 
 public class Warrior : Character, IDamageable

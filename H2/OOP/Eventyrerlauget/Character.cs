@@ -24,13 +24,13 @@ public abstract class Character
         Equipment.TryAdd("armor", armor);
     }
 
-    public abstract void Attack(IDamageable target, IDiceRoller diceRoller)
+    public virtual void Attack(IDamageable target, IDiceRoller diceRoller)
     {
         int attackRole = diceRoller.RollDice(20);
 
         if (attackRole >= target.ArmorClass())
         {
-            target.TakeDamage(diceRoller.RollDice(WeaponDamage()))
+            target.TakeDamage(diceRoller.RollDice(WeaponDamage()));
         }
     }
 
@@ -60,15 +60,15 @@ public abstract class Character
 
         Armor castArmor = armor as Armor;
         
-        return castArmor.armorClass ?? 10;
+        return castArmor.armorClass;
     }
 
-    private int WeaponDamage()
+    protected int WeaponDamage()
     {
         Equipment.TryGetValue("weapon", out Item weapon);
 
         Weapon castWeapon = weapon as Weapon;
         
-        return castWeapon.damage ?? 6;
+        return castWeapon.damage;
     }
 }

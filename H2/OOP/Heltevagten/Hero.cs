@@ -30,8 +30,24 @@ public abstract class Hero
         EnergyLevel += amount;
     }
 
+    public bool HasEnoughEnergy(int amount)
+    {
+        return EnergyLevel >= amount;
+    }
+
+    public void UseEnergy(int amount)
+    {
+        EnergyLevel = Math.Max(0, EnergyLevel - amount);
+    }
+
     public void UpdateState(HeroState newState)
     {
         State = newState;
+    }
+
+    public void Dispatch(Incident incident)
+    {
+        State = HeroState.Dispatched;
+        CurrentLocation = incident.Location;
     }
 } 

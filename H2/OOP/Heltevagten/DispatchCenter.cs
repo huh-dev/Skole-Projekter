@@ -27,9 +27,16 @@ public class DispatchCenter
         Incidents.Add(incident);
     }
 
-    public void DispatchHeroToIncident(Incident incident)
+    public void DispatchHeroToIncident(Incident incident, Hero? hero)
     {
-        DispatchStrategy.SelectHero(incident, Heroes.Where(h => h.State == HeroState.Available).ToList());
+        if (hero is null)
+        {
+            DispatchStrategy.SelectHero(incident, Heroes.Where(h => h.State == HeroState.Available).ToList());
+        }
+        else
+        {
+            hero.Dispatch(incident);
+        }
     }
 
 }

@@ -10,8 +10,8 @@ public class IncidentScenario
     public string LocationName { get; private set; }
     public int Day { get; private set; }
     public int Points { get; private set; }
-
-    public IncidentScenario(string description, Severity severity, Risk risk, string locationName, int day, int points)
+    public int Duration { get; private set; }
+    public IncidentScenario(string description, Severity severity, Risk risk, string locationName, int day, int points, int duration)
     {
         Description = description;
         Severity = severity;
@@ -19,5 +19,6 @@ public class IncidentScenario
         LocationName = locationName;
         Day = day;
         Points = points;
+        Duration = duration;
     }
 }

@@ -8,7 +8,7 @@ public abstract class Hero
     public string Name { get; private set; }
     public int EnergyLevel { get; private set; }
     public HeroState State { get; private set; }
-    public Location CurrentLocation { get; private set; }
+    public Location CurrentLocation { get; protected set; }
 
     public Hero(string name, int energyLevel, Location currentLocation)
     {

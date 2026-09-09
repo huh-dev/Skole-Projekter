@@ -1,5 +1,6 @@
 using Heltevagten.Incidents;
 using Heltevagten.Interfaces;
+using Heltevagten.Enums;
 
 namespace Heltevagten;
 
@@ -28,8 +29,7 @@ public class DispatchCenter
 
     public void DispatchHeroToIncident(Incident incident)
     {
-        // var hero = DispatchStrategy.SelectHero(Heroes, incident);
-        // hero.DispatchToIncident(incident);
+        DispatchStrategy.SelectHero(incident, Heroes.Where(h => h.State == HeroState.Available).ToList());
     }
 
 }

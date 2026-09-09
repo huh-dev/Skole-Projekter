@@ -5,7 +5,7 @@ namespace Heltevagten.Heros;
 
 public class HealingHero : Hero
 {
-    public HealingHero(string name, int energyLevel, Location currentLocation) : base(name, energyLevel, currentLocation)
+    public HealingHero(string name, int energyLevel, int cost, Location currentLocation) : base(name, energyLevel, cost, currentLocation)
     {
     }
 

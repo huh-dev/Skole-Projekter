@@ -6,7 +6,7 @@ namespace Heltevagten.Heros;
 
 public class FlyingHero : Hero, IFlyable
 {
-    public FlyingHero(string name, int energyLevel, Location currentLocation) : base(name, energyLevel, currentLocation)
+    public FlyingHero(string name, int energyLevel, int cost, Location currentLocation) : base(name, energyLevel, cost, currentLocation)
     {
     }
 

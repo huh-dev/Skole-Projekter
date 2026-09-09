@@ -1,6 +1,7 @@
 using Heltevagten.Enums;
 using Heltevagten.Incidents;
 using Heltevagten.Interfaces;
+using Heltevagten.Exceptions;
 
 namespace Heltevagten.Strategies;
 
@@ -12,6 +13,10 @@ public class ClosestHeroStrategy : IDispatchStrategy
         if (closestHero != null)
         {
             closestHero.UpdateState(HeroState.Dispatched);
+        }
+        else
+        {
+            throw new NoSuitableHeroFoundException("No suitable hero found");
         }
     }
 }

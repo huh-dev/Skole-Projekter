@@ -148,13 +148,16 @@ public class HeroDispatch
 
             try
             {
-                strategy.SelectHero(incident, usableHeroes);
-                Hero selectedHero = SearchEngine.FindFirst(usableHeroes, hero => hero.State == HeroState.Dispatched);
+                Hero selectedHero = strategy.SelectHero(incident, usableHeroes);
                 AssignHero(incident, selectedHero);
             }
             catch (NoSuitableHeroFoundException)
             {
                 Console.WriteLine($"No suitable hero found for '{incident.Description}'.");
+            }
+            catch (HeroUnavailableException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
@@ -197,7 +200,14 @@ public class HeroDispatch
                 continue;
             }
 
-            AssignHero(incident, usableHeroes[selectedHero - 1]);
+            try
+            {
+                AssignHero(incident, usableHeroes[selectedHero - 1]);
+            }
+            catch (HeroUnavailableException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 
@@ -232,15 +242,18 @@ public class HeroDispatch
         int incidentCost = GetIncidentEnergyCost(incident.Level);
         int energyCost = travelCost + incidentCost;
 
-        if (!hero.HasEnoughEnergy(energyCost))
+        if (hero.State != HeroState.Available)
         {
-            Console.WriteLine($"{hero.Name} does not have enough energy. Needed: {energyCost}, current: {hero.EnergyLevel}.");
-            hero.UpdateState(HeroState.Available);
-            return;
+            throw new HeroUnavailableException($"{hero.Name} is {hero.State.ToString().ToLower()} and cannot be dispatched.");
         }
 
-        hero.UseEnergy(travelCost);
+        if (!hero.HasEnoughEnergy(energyCost))
+        {
+            throw new HeroUnavailableException($"{hero.Name} does not have enough energy. Needed: {energyCost}, current: {hero.EnergyLevel}.");
+        }
+
         _dispatchCenter.DispatchHeroToIncident(incident, hero);
+        hero.UseEnergy(travelCost);
         _assignments[incident] = hero;
 
         Console.WriteLine($"{hero.Name} is responding to '{incident.Description}'. Travel energy used: {travelCost}.");

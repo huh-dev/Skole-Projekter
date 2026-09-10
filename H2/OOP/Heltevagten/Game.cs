@@ -1,5 +1,6 @@
 using Heltevagten.Dispatch;
 using Heltevagten.Enums;
+using Heltevagten.Exceptions;
 using Heltevagten.Heros;
 using Heltevagten.Incidents;
 using Heltevagten.Strategies;
@@ -84,7 +85,22 @@ public class Game
                 continue;
             }
 
-            HandleChoice(choice);
+            
+            //Custom exception handling for the choice of the user.
+            try
+            {
+                HandleChoice(choice);
+            }
+            catch (HeroUnavailableException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Pause();
+            }
+            catch (NoSuitableHeroFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Pause();
+            }
         }
     }
 
@@ -197,7 +213,7 @@ public class Game
 
         foreach (Hero hero in _dispatchCenter.Heroes)
         {
-            Console.WriteLine($"  - {hero.Name,-8} | Status: {hero.State,-12} | Energy: {hero.EnergyLevel}%");
+            Console.WriteLine($"  - {hero.Name,-8} | Status: {hero.State,-12} | Energy: {hero.EnergyLevel}/{hero.MaxEnergy}");
         }
 
         Console.WriteLine();
@@ -257,7 +273,9 @@ public class Game
 
         foreach (IncidentScenario scenario in incidents)
         {
-            _dispatchCenter.ReportIncident(new Incident(scenario.Description, _locations[scenario.LocationName], scenario.Severity, scenario.Day, scenario.Points, scenario.Duration));
+            Incident incident = new Incident(scenario.Description, _locations[scenario.LocationName], scenario.Severity, scenario.Day, scenario.Points, scenario.Duration);
+            incident.IncidentResolved += WriteIncidentResolvedLog;
+            _dispatchCenter.ReportIncident(incident);
         }
 
     }
@@ -273,6 +291,12 @@ public class Game
     {
         if (_assignments.Count == 0)
         {
+            if (RestExhaustedHeroes())
+            {
+                Pause();
+                return;
+            }
+
             Console.WriteLine("No heroes are currently responding to incidents.");
             Pause();
             return;
@@ -287,12 +311,23 @@ public class Game
             int incidentCost = HeroDispatch.GetIncidentEnergyCost(incident.Level);
 
             hero.UseEnergy(incidentCost);
-            incident.Resolve();
-            hero.UpdateState(HeroState.Available);
-            _points += incident.Points;
-            _assignments.Remove(incident);
+            Console.WriteLine(hero.UseSignatureMove());
 
-            Console.WriteLine($"{hero.Name} resolved '{incident.Description}'. Work energy used: {incidentCost}. +{incident.Points} points.");
+            _dispatchCenter.ResolveIncident(incident, resolved =>
+            {
+                _dispatchCenter.ReleaseHero(hero);
+                _points += resolved.Points;
+                _assignments.Remove(resolved);
+
+                if (hero.State == HeroState.Recharging)
+                {
+                    Console.WriteLine($"{hero.Name} resolved '{resolved.Description}' but is now exhausted and must recharge. +{resolved.Points} points.");
+                }
+                else
+                {
+                    Console.WriteLine($"{hero.Name} resolved '{resolved.Description}'. Work energy used: {incidentCost}. +{resolved.Points} points.");
+                }
+            });
         }
 
         if (GetOpenIncidents().Count == 0)
@@ -319,6 +354,7 @@ public class Game
         }
 
         _currentDay++;
+        RechargeRosterOvernight();
         StartIncidents();
 
         Console.WriteLine();
@@ -387,6 +423,54 @@ public class Game
     private List<Incident> GetOpenIncidents()
     {
         return SearchEngine.FindAll(_dispatchCenter.Incidents, incident => !incident.IsResolved).ToList();
+    }
+
+    
+    /**
+     * MARK: WRITE INCIDENT RESOLVED LOG
+     * This will write the incident resolved log.
+     * @param incident - The incident.
+     */
+    private void WriteIncidentResolvedLog(Incident incident)
+    {
+        Console.WriteLine($"[LOG] Incident resolved: {incident.Description}");
+    }
+
+
+    /*
+     * MARK: REST EXHAUSTED HEROES
+     * This will rest the exhausted heroes.
+     * @return True if there are exhausted heroes, false otherwise.
+     */
+    private bool RestExhaustedHeroes()
+    {
+        List<Hero> exhaustedHeroes = SearchEngine.FindAll(_dispatchCenter.Heroes, hero => hero.State == HeroState.Recharging).ToList();
+        if (exhaustedHeroes.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (Hero hero in exhaustedHeroes)
+        {
+            _dispatchCenter.RechargeHero(hero);
+            Console.WriteLine($"{hero.Name} rested and recovered energy.");
+        }
+
+        return true;
+    }
+
+    /*
+     * MARK: RECHARGE ROSTER OVERNIGHT
+     * This will recharge the roster overnight.
+     */
+    private void RechargeRosterOvernight()
+    {
+        List<Hero> exhaustedHeroes = SearchEngine.FindAll(_dispatchCenter.Heroes, hero => hero.State == HeroState.Recharging).ToList();
+        foreach (Hero hero in exhaustedHeroes)
+        {
+            _dispatchCenter.RechargeHero(hero);
+            Console.WriteLine($"{hero.Name} recharged overnight.");
+        }
     }
 
     

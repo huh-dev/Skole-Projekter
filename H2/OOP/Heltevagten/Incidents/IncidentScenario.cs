@@ -11,6 +11,9 @@ public class IncidentScenario
     public int Day { get; private set; }
     public int Points { get; private set; }
     public int Duration { get; private set; }
+
+
+    
     public IncidentScenario(string description, Severity severity, Risk risk, string locationName, int day, int points, int duration)
     {
         Description = description;

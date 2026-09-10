@@ -1,65 +1,72 @@
+using Heltevagten.Enums;
+using Heltevagten.Exceptions;
 using Heltevagten.Incidents;
 using Heltevagten.Interfaces;
-using Heltevagten.Enums;
 
 namespace Heltevagten;
 
+/// <summary>
+/// Holds registered heroes and reported incidents. Hero selection is injected
+/// through <see cref="IDispatchStrategy"/> so the center does not own that logic.
+/// </summary>
 public class DispatchCenter
 {
-    public List<Hero> Heroes { get; private set; }
-    public List<Incident> Incidents { get; private set; }
+    private readonly List<Hero> _heroes = new List<Hero>();
+    private readonly List<Incident> _incidents = new List<Incident>();
+
+    public IReadOnlyList<Hero> Heroes => _heroes;
+    public IReadOnlyList<Incident> Incidents => _incidents;
     public IDispatchStrategy DispatchStrategy { get; private set; }
 
-    
-    /*
-     * MARK: CONSTRUCTOR
-     * This will initialize the dispatch center.
-     * @param dispatchStrategy - The dispatch strategy.
-     */
+    /// <param name="dispatchStrategy">Selection policy supplied from the outside (dependency inversion).</param>
     public DispatchCenter(IDispatchStrategy dispatchStrategy)
     {
-        Heroes = new List<Hero>();
-        Incidents = new List<Incident>();
         DispatchStrategy = dispatchStrategy;
     }
 
-    /*
-     * MARK: REGISTER HERO
-     * This will register a hero to the dispatch center.
-     * @param hero - The hero.
-     */
     public void RegisterHero(Hero hero)
     {
-        Heroes.Add(hero);
+        _heroes.Add(hero);
     }
 
-    /*
-     * MARK: REPORT INCIDENT
-     * This will report an incident to the dispatch center.
-     * @param incident - The incident.
-     */
     public void ReportIncident(Incident incident)
     {
-        Incidents.Add(incident);
+        _incidents.Add(incident);
     }
 
-    /*
-     * MARK: DISPATCH HERO TO INCIDENT
-     * This will dispatch a hero to an incident.
-     * @param incident - The incident.
-     * @param hero - The hero.
-     */
+    /// <summary>
+    /// Dispatches a specific hero, or uses the injected strategy when <paramref name="hero"/> is null.
+    /// </summary>
     public void DispatchHeroToIncident(Incident incident, Hero? hero)
     {
-        if (hero is null)
+        Hero selectedHero = hero ?? DispatchStrategy.SelectHero(
+            incident,
+            SearchEngine.FindAll(_heroes, h => h.State == HeroState.Available).ToList());
+
+        if (selectedHero.State != HeroState.Available)
         {
-            DispatchStrategy.SelectHero(
-                incident,
-                SearchEngine.FindAll(Heroes, h => h.State == HeroState.Available).ToList());
-            return;
+            throw new HeroUnavailableException($"{selectedHero.Name} is {selectedHero.State.ToString().ToLower()} and cannot be dispatched.");
         }
 
-        hero.Dispatch(incident);
+        selectedHero.Dispatch(incident);
     }
 
+    public void ReleaseHero(Hero hero)
+    {
+        hero.Release();
+    }
+
+    public void RechargeHero(Hero hero)
+    {
+        hero.Recharge();
+    }
+
+    /// <summary>
+    /// Marks an incident resolved and runs the supplied callback.
+    /// </summary>
+    public void ResolveIncident(Incident incident, Action<Incident> onResolved)
+    {
+        incident.Resolve();
+        onResolved(incident);
+    }
 }

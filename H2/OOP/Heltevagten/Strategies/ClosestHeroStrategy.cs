@@ -1,13 +1,12 @@
-using Heltevagten.Enums;
+using Heltevagten.Exceptions;
 using Heltevagten.Incidents;
 using Heltevagten.Interfaces;
-using Heltevagten.Exceptions;
 
 namespace Heltevagten.Strategies;
 
 public class ClosestHeroStrategy : IDispatchStrategy
 {
-    public void SelectHero(Incident incident, List<Hero> availableHeroes)
+    public Hero SelectHero(Incident incident, List<Hero> availableHeroes)
     {
         Hero? closestHero = availableHeroes
             .OrderBy(hero => hero.CurrentLocation.CalculateDistance(incident.Location))
@@ -15,9 +14,9 @@ public class ClosestHeroStrategy : IDispatchStrategy
 
         if (closestHero is null)
         {
-            throw new NoSuitableHeroFoundException("No suitable hero found");
+            throw new NoSuitableHeroFoundException($"No suitable hero found for '{incident.Description}'.");
         }
 
-        closestHero.UpdateState(HeroState.Dispatched);
+        return closestHero;
     }
 }

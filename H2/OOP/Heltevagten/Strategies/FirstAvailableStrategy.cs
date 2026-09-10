@@ -1,22 +1,21 @@
 using Heltevagten.Enums;
+using Heltevagten.Exceptions;
 using Heltevagten.Incidents;
 using Heltevagten.Interfaces;
-using Heltevagten.Exceptions;
 
 namespace Heltevagten.Strategies;
 
 public class FirstAvailableStrategy : IDispatchStrategy
 {
-    public void SelectHero(Incident incident, List<Hero> availableHeroes)
+    public Hero SelectHero(Incident incident, List<Hero> availableHeroes)
     {
         try
         {
-            Hero firstAvailableHero = SearchEngine.FindFirst(availableHeroes, hero => hero.State == HeroState.Available);
-            firstAvailableHero.UpdateState(HeroState.Dispatched);
+            return SearchEngine.FindFirst(availableHeroes, hero => hero.State == HeroState.Available);
         }
         catch (InvalidOperationException)
         {
-            throw new NoSuitableHeroFoundException("No suitable hero found");
+            throw new NoSuitableHeroFoundException($"No suitable hero found for '{incident.Description}'.");
         }
     }
 }

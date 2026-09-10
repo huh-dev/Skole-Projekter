@@ -4,6 +4,11 @@ namespace Heltevagten.Incidents;
 
 public static class IncidentScenarios
 {
+
+    /*
+     * MARK: ALL INCIDENT SCENARIOS
+     * This is a list of all the incident scenarios.
+     */
     public static readonly IReadOnlyList<IncidentScenario> All = new List<IncidentScenario>
     {
         new IncidentScenario("Dumpster fire spreading toward the food stalls", Severity.Low, Risk.Fire, "Central Plaza", 1, 10, 10),
@@ -56,6 +61,10 @@ public static class IncidentScenarios
         new IncidentScenario("Cable car stalled above the river gorge", Severity.High, Risk.Aerial, "River Crossing", 7, 55, 26)
     };
 
+    /*
+     * MARK: STATIC FILTERS
+     * These are static filters that are used to filter the incident scenarios.
+     */
     public static List<IncidentScenario> ForDay(int day)
     {
         return All.Where(scenario => scenario.Day == day).ToList();

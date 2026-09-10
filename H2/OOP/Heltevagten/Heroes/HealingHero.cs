@@ -9,11 +9,6 @@ public class HealingHero : Hero
     {
     }
 
-    public string UseSignatureMove()
-    {
-        return $"{Name} uses their signature move!";
-    }
-
     public void HealCivilians()
     {
         Console.WriteLine($"{Name} heals the civilians!");

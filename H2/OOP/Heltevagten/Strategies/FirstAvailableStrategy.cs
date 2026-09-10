@@ -7,15 +7,14 @@ namespace Heltevagten.Strategies;
 
 public class FirstAvailableStrategy : IDispatchStrategy
 {
-
     public void SelectHero(Incident incident, List<Hero> availableHeroes)
     {
-        var firstAvailableHero = availableHeroes.FirstOrDefault(h => h.State == HeroState.Available);
-        if (firstAvailableHero != null)
+        try
         {
+            Hero firstAvailableHero = SearchEngine.FindFirst(availableHeroes, hero => hero.State == HeroState.Available);
             firstAvailableHero.UpdateState(HeroState.Dispatched);
         }
-        else
+        catch (InvalidOperationException)
         {
             throw new NoSuitableHeroFoundException("No suitable hero found");
         }

@@ -1,3 +1,4 @@
+using Heltevagten.Dispatch;
 using Heltevagten.Enums;
 using Heltevagten.Heros;
 using Heltevagten.Incidents;
@@ -15,10 +16,17 @@ public class Game
      */
     private readonly DispatchCenter _dispatchCenter = new DispatchCenter(new FirstAvailableStrategy());
     private readonly Dictionary<Incident, Hero> _assignments = new Dictionary<Incident, Hero>();
+    private readonly HeroDispatch _heroDispatch;
 
-    private const int LowIncidentEnergyCost = 5;
-    private const int MediumIncidentEnergyCost = 10;
-    private const int HighIncidentEnergyCost = 15;
+    
+    /*
+     * MARK: CONSTRUCTOR
+     * This will initialize the game.
+     */
+    public Game()
+    {
+        _heroDispatch = new HeroDispatch(_dispatchCenter, _assignments);
+    }
 
     // Dictionary of named locations in the game. Each location has a descriptive name and coordinates.
     // The locations are used for calculating the energy required for heroes to travel.
@@ -112,6 +120,11 @@ public class Game
         _dispatchCenter.RegisterHero(_allHeroes["Pulse"]);
     }
 
+    /**
+     * MARK: HANDLE CHOICE
+     * This will handle the choice of the user.
+     * @param choice - The choice of the user.
+     */
     private void HandleChoice(int choice)
     {
         switch (choice)
@@ -121,7 +134,7 @@ public class Game
                 Console.WriteLine("Dispatch center signing off. Stay safe out there.");
                 break;
             case 1:
-                DispatchHero();
+                _heroDispatch.Open();
                 break;
             case 2:
                 OpenHeroShop();
@@ -216,9 +229,14 @@ public class Game
         Console.WriteLine();
     }
 
-    private static void PrintMenu()
+    
+    /**
+     * MARK: PRINT MENU
+     * This will print the menu of the game.
+     */
+    private void PrintMenu()
     {
-        Console.WriteLine("1) Dispatch Hero");
+        Console.WriteLine("1) Dispatch Heroes");
         Console.WriteLine("2) Hero Shop");
         Console.WriteLine("3) Complete responses");
         Console.WriteLine("0) Quit");
@@ -247,116 +265,10 @@ public class Game
 
 
 
-
-    /**
-     * MARK: DISPATCH HERO
-     * This will dispatch a hero to an incident.
+    /*
+     * MARK: COMPLETE RESPONSES
+     * This will complete the responses of the heroes.
      */
-    private void DispatchHero()
-    {
-        List<Incident> openIncidents = GetWaitingIncidents();
-
-        if (openIncidents.Count == 0)
-        {
-            Console.WriteLine("No incidents waiting for a hero.");
-            Pause();
-            return;
-        }
-
-        for (int i = 0; i < openIncidents.Count; i++)
-        {
-            Incident incident = openIncidents[i];
-            Console.WriteLine($"  {i + 1}) {incident.Description} (Lvl {incident.Level})");
-        }
-
-        Console.Write("Select an incident: ");
-        if (!int.TryParse(Console.ReadLine(), out int selectedIncident) || selectedIncident < 1 || selectedIncident > openIncidents.Count)
-        {
-            Console.WriteLine($"Invalid input. Please enter a number between 1 and {openIncidents.Count}.");
-            Pause();
-            return;
-        }
-
-        Incident selected = openIncidents[selectedIncident - 1];
-
-        Console.Clear();
-        Console.WriteLine($"You have now chosen the incident: {selected.Description}");
-        Console.WriteLine("--------------------------------");
-
-        List<Hero> availableHeroes = _dispatchCenter.Heroes.Where(hero => hero.State == HeroState.Available).ToList();
-        if (availableHeroes.Count == 0)
-        {
-            Console.WriteLine("No available heroes.");
-            Pause();
-            return;
-        }
-
-        List<Hero> usableHeroes = availableHeroes
-            .Where(hero => hero.HasEnoughEnergy(GetEnergyCost(hero, selected)))
-            .ToList();
-        if (usableHeroes.Count == 0)
-        {
-            Console.WriteLine("No available heroes have enough energy for this incident.");
-            Pause();
-            return;
-        }
-
-        Console.Write("Do you want to dispatch the closest hero? (y/n): ");
-        string? closestHeroChoice = Console.ReadLine();
-        if (closestHeroChoice == "y")
-        {
-            Hero closestHero = usableHeroes
-                .OrderBy(hero => hero.CurrentLocation.CalculateDistance(selected.Location))
-                .First();
-
-            AssignHero(selected, closestHero);
-            return;
-        }
-
-        Console.WriteLine();
-        Console.WriteLine("Please select a hero to dispatch to the incident.");
-
-        for (int i = 0; i < usableHeroes.Count; i++)
-        {
-            Hero hero = usableHeroes[i];
-            int energyCost = GetEnergyCost(hero, selected);
-            Console.WriteLine($"  {i + 1}) {hero.Name,-8} | Energy: {hero.EnergyLevel}% | Needed: {energyCost}");
-        }
-
-        Console.Write("Select a hero: ");
-        if (!int.TryParse(Console.ReadLine(), out int selectedHero) || selectedHero < 1 || selectedHero > usableHeroes.Count)
-        {
-            Console.WriteLine($"Invalid input. Please enter a number between 1 and {usableHeroes.Count}.");
-            Pause();
-            return;
-        }
-
-        Hero chosenHero = usableHeroes[selectedHero - 1];
-        AssignHero(selected, chosenHero);
-    }
-
-    private void AssignHero(Incident incident, Hero hero)
-    {
-        int travelCost = GetTravelEnergyCost(hero, incident);
-        int incidentCost = GetIncidentEnergyCost(incident.Level);
-        int energyCost = travelCost + incidentCost;
-
-        if (!hero.HasEnoughEnergy(energyCost))
-        {
-            Console.WriteLine($"{hero.Name} does not have enough energy. Needed: {energyCost}, current: {hero.EnergyLevel}.");
-            Pause();
-            return;
-        }
-
-        hero.UseEnergy(travelCost);
-        _dispatchCenter.DispatchHeroToIncident(incident, hero);
-        _assignments[incident] = hero;
-
-        ShowLoading($"{hero.Name} is heading to the incident");
-        Console.WriteLine($"{hero.Name} is responding. Travel energy used: {travelCost}.");
-        Pause();
-    }
-
     private void CompleteResponses()
     {
         if (_assignments.Count == 0)
@@ -372,7 +284,7 @@ public class Game
         {
             Incident incident = assignment.Key;
             Hero hero = assignment.Value;
-            int incidentCost = GetIncidentEnergyCost(incident.Level);
+            int incidentCost = HeroDispatch.GetIncidentEnergyCost(incident.Level);
 
             hero.UseEnergy(incidentCost);
             incident.Resolve();
@@ -383,7 +295,34 @@ public class Game
             Console.WriteLine($"{hero.Name} resolved '{incident.Description}'. Work energy used: {incidentCost}. +{incident.Points} points.");
         }
 
+        if (GetOpenIncidents().Count == 0)
+        {
+            StartNextDay();
+        }
+
         Pause();
+    }
+
+    /*
+     * MARK: START NEXT DAY
+     * This will start the next day of the game.
+     */
+    private void StartNextDay()
+    {
+        if (_currentDay >= _totalDays)
+        {
+            _isRunning = false;
+            Console.WriteLine();
+            Console.WriteLine($"All {_totalDays} days are complete. Final score: {_points} points.");
+            Console.WriteLine("Dispatch center signing off. Stay safe out there.");
+            return;
+        }
+
+        _currentDay++;
+        StartIncidents();
+
+        Console.WriteLine();
+        Console.WriteLine($"All incidents are resolved. Day {_currentDay} of {_totalDays} has begun.");
     }
 
     /**
@@ -392,9 +331,7 @@ public class Game
      */
     private void OpenHeroShop()
     {
-        List<Hero> heroesForSale = _allHeroes.Values
-            .Where(hero => !_dispatchCenter.Heroes.Contains(hero))
-            .ToList();
+        List<Hero> heroesForSale = SearchEngine.FindAll(_allHeroes.Values, hero => !_dispatchCenter.Heroes.Contains(hero)).ToList();
 
         if (heroesForSale.Count == 0)
         {
@@ -442,36 +379,22 @@ public class Game
         Pause();
     }
 
+    /*
+     * MARK: GET OPEN INCIDENTS
+     * This will get the open incidents.
+     * @return The open incidents.
+     */
     private List<Incident> GetOpenIncidents()
     {
-        return _dispatchCenter.Incidents.Where(incident => !incident.IsResolved).ToList();
+        return SearchEngine.FindAll(_dispatchCenter.Incidents, incident => !incident.IsResolved).ToList();
     }
 
-    private List<Incident> GetWaitingIncidents()
-    {
-        return GetOpenIncidents().Where(incident => !_assignments.ContainsKey(incident)).ToList();
-    }
-
-    private int GetEnergyCost(Hero hero, Incident incident)
-    {
-        return GetTravelEnergyCost(hero, incident) + GetIncidentEnergyCost(incident.Level);
-    }
-
-    private static int GetTravelEnergyCost(Hero hero, Incident incident)
-    {
-        return (int)Math.Ceiling(hero.CurrentLocation.CalculateDistance(incident.Location));
-    }
-
-    private static int GetIncidentEnergyCost(Severity level)
-    {
-        return level switch
-        {
-            Severity.Low => LowIncidentEnergyCost,
-            Severity.Medium => MediumIncidentEnergyCost,
-            Severity.High => HighIncidentEnergyCost,
-            _ => LowIncidentEnergyCost
-        };
-    }
+    
+    /*
+     * MARK: SIMPLE HELPER FUNCTIONS
+     * These are simple helper functions that are used throughout the game.
+     * These functions are made, because they are being used in multiple places in the code, and makes the code more readable and maintainable.
+     */
 
     private static string GetHeroRole(Hero hero)
     {

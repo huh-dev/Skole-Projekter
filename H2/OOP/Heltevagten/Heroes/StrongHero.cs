@@ -9,12 +9,6 @@ public class StrongHero : Hero, ISuperStrong
     {
     }
 
-
-    public string UseSignatureMove()
-    {
-        return $"{Name} uses their signature move!";
-    }
-
     public void LiftHeavyObject()
     {
         Console.WriteLine($"{Name} lifts a heavy object!");

@@ -9,14 +9,15 @@ public class ClosestHeroStrategy : IDispatchStrategy
 {
     public void SelectHero(Incident incident, List<Hero> availableHeroes)
     {
-        var closestHero = availableHeroes.OrderBy(h => h.CurrentLocation.CalculateDistance(incident.Location)).FirstOrDefault();
-        if (closestHero != null)
-        {
-            closestHero.UpdateState(HeroState.Dispatched);
-        }
-        else
+        Hero? closestHero = availableHeroes
+            .OrderBy(hero => hero.CurrentLocation.CalculateDistance(incident.Location))
+            .FirstOrDefault();
+
+        if (closestHero is null)
         {
             throw new NoSuitableHeroFoundException("No suitable hero found");
         }
+
+        closestHero.UpdateState(HeroState.Dispatched);
     }
 }

@@ -10,11 +10,6 @@ public class FlyingHero : Hero, IFlyable
     {
     }
 
-    public string UseSignatureMove()
-    {
-        return $"{Name} uses their signature move!";
-    }
-
     public void FlyTo(Location location)
     {
         CurrentLocation = location;

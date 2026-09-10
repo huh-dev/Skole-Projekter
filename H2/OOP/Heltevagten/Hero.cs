@@ -20,16 +20,6 @@ public abstract class Hero
         State = HeroState.Available;
     }
 
-    public string UseSignatureMove()
-    {
-        return $"{Name} uses their signature move!";
-    }
-
-    public void RechargeEnergyLevel(int amount)
-    {
-        EnergyLevel += amount;
-    }
-
     public bool HasEnoughEnergy(int amount)
     {
         return EnergyLevel >= amount;

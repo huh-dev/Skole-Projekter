@@ -45,9 +45,7 @@ public abstract class Hero
         State = HeroState.Available;
     }
 
-    /// <summary>
-    /// Polymorphic signature action. Each hero type overrides this differently.
-    /// </summary>
+
     public abstract string UseSignatureMove();
 
     public bool HasEnoughEnergy(int amount)
@@ -79,9 +77,6 @@ public abstract class Hero
         }
     }
 
-    /// <summary>
-    /// Sends the hero to an incident. Throws if the hero is dispatched or recharging.
-    /// </summary>
     public virtual void Dispatch(Incident incident)
     {
         if (State != HeroState.Available)

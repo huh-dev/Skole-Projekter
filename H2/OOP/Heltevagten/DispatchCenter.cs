@@ -18,7 +18,6 @@ public class DispatchCenter
     public IReadOnlyList<Incident> Incidents => _incidents;
     public IDispatchStrategy DispatchStrategy { get; private set; }
 
-    /// <param name="dispatchStrategy">Selection policy supplied from the outside (dependency inversion).</param>
     public DispatchCenter(IDispatchStrategy dispatchStrategy)
     {
         DispatchStrategy = dispatchStrategy;
@@ -34,9 +33,7 @@ public class DispatchCenter
         _incidents.Add(incident);
     }
 
-    /// <summary>
-    /// Dispatches a specific hero, or uses the injected strategy when <paramref name="hero"/> is null.
-    /// </summary>
+
     public void DispatchHeroToIncident(Incident incident, Hero? hero)
     {
         Hero selectedHero = hero ?? DispatchStrategy.SelectHero(
@@ -61,9 +58,6 @@ public class DispatchCenter
         hero.Recharge();
     }
 
-    /// <summary>
-    /// Marks an incident resolved and runs the supplied callback.
-    /// </summary>
     public void ResolveIncident(Incident incident, Action<Incident> onResolved)
     {
         incident.Resolve();

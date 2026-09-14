@@ -8,7 +8,7 @@ public class Program
 
 
     //Product name, Product category, Product price
-    private static readonly List<Product> _productsList = new()
+    private static readonly List<Product> ProductsList = new()
     {
         new Product(name: "Gaming Laptop", category: "Computer", price: 12500),
         new Product(name: "Office Laptop", category: "Computer", price: 7500),
@@ -24,7 +24,7 @@ public class Program
         // LambdaExpressions();
 
         // //Extension methods
-        var expensiveProducts = _productsList.ExpensiveProducts();
+        var expensiveProducts = ProductsList.ExpensiveProducts();
 
         foreach (var product in expensiveProducts)
         {
@@ -44,7 +44,7 @@ public class Program
         var isProductMoreThan5000 = (int price) => price > 5000;
 
         //Lambda expression to get all products that costs more than 5000
-        var productsMoreThan5000 = _productsList.Where(p => isProductMoreThan5000(p.price));
+        var productsMoreThan5000 = ProductsList.Where(p => isProductMoreThan5000(p.price));
 
         // foreach (var product in productsMoreThan5000)
         // {
@@ -52,7 +52,7 @@ public class Program
         // }
 
         //Lambda expression to get products with a price over 10000 or have the category "Skærm"
-        var productsOver10000OrCategorySkærm = _productsList.Where(p => p.price > 10000 || p.category == "Skærm");
+        var productsOver10000OrCategorySkærm = ProductsList.Where(p => p.price > 10000 || p.category == "Skærm");
 
         // foreach (var product in productsOver10000OrCategorySkærm)
         // {
@@ -60,7 +60,7 @@ public class Program
         // }
 
         // Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør"
-        var ProductsBetween1000And10000NotTilbehør = _productsList.Where(p => p.price > 1000 && p.price < 10000 && p.category != "Tilbehør");
+        var ProductsBetween1000And10000NotTilbehør = ProductsList.Where(p => p.price > 1000 && p.price < 10000 && p.category != "Tilbehør");
 
         // foreach (var product in ProductsBetween1000And10000NotTilbehør)
         // {
@@ -68,7 +68,7 @@ public class Program
         // }
 
         // Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør" and sort by price
-        var ProductsBetween1000And10000NotTilbehørSorted = _productsList.Where(p =>
+        var ProductsBetween1000And10000NotTilbehørSorted = ProductsList.Where(p =>
             p.price > 1000 && p.price < 10000 && p.category != "Tilbehør").OrderBy(p => p.price);
         
         // foreach (var product in ProductsBetween1000And10000NotTilbehørSorted)

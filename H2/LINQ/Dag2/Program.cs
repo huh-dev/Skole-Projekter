@@ -27,17 +27,14 @@ class Program
     static void Main(string[] args)
     {
 
-        var sortproductnames = Products.SortProductsByCategoryAndPriceOrName(true);
-        foreach (var product in sortproductnames)
+        var categories = Products.FindAllCategories();
+        foreach (var category in categories)
         {
-            Console.WriteLine($"{product.name} - {product.price} - {product.category}");
+            Console.WriteLine(category);
         }
+        Console.WriteLine("Kategorier: " + categories.Count());
+
         Console.WriteLine("--------------------------------");
-        var sortproductprices = Products.SortProductsByCategoryAndPriceOrName(false);
-        foreach (var product in sortproductprices)
-        {
-            Console.WriteLine($"{product.name} - {product.price} - {product.category}");
-        }
 
 
     }

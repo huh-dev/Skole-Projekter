@@ -26,16 +26,5 @@ class Program
 
     static void Main(string[] args)
     {
-
-        var categories = Products.FindAllCategories();
-        foreach (var category in categories)
-        {
-            Console.WriteLine(category);
-        }
-        Console.WriteLine("Kategorier: " + categories.Count());
-
-        Console.WriteLine("--------------------------------");
-
-
     }
 }

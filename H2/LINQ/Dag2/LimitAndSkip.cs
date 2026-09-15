@@ -9,9 +9,9 @@ public static class LimitAndSkip
     }
 
     //FIND THE LOWEST 5 PRODUCTS
-    public static IEnumerable<Product> FindTheLowest5Products(this List<Product> products)
+    public static IEnumerable<Product> FindTheLowest5Products(this List<Product> products, int amount)
     {
-        return products.OrderBy(p => p.price).Take(5);
+        return products.OrderBy(p => p.price).Take(amount);
     }
 
     //SORT THE PRODUCTS BY PRICE DESCENDING BUT KEEP ONLY THE 4 TO 6 PRODUCTS

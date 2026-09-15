@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
+﻿
 using System.Linq.Expressions;
-using Microsoft.VisualBasic;
 
 namespace H2.LINQ.Dag1;
 
@@ -155,13 +154,14 @@ public class Program
     private static void ExpressionTree()
     {
 
-        Expression<Func<Product, bool>> isProductMoreThan5000 = p => p.price > 5000;
+        Expression<Func<Product, bool>> isProductMoreThan5000 = p => p.price > 5000 && p.category == "Computer";
 
-    
         var compliedExpression = isProductMoreThan5000.Compile();
 
-        Console.WriteLine(compliedExpression(new Product(name: "Gaming Laptop", category: "Computer", price: 12500)));
+        Console.WriteLine(compliedExpression(ProductsList[0]));
+
     }
+
 }
 
 public static class ExtensionMethods

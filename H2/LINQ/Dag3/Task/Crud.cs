@@ -43,4 +43,16 @@ public static class Crud
         }
         products.Remove(product);
     }
+
+    //UPDATE PRODUCTS WITH A RANDOM NUMBER OF UNITS SOLD
+    public static IQueryable<Products> UpdateProductUnitsSold(this DbSet<Products> products)
+    {
+        foreach (var product in products)
+        {
+            product.units_sold = new Random().Next(1, 100);
+            products.Update(product);
+        }
+        
+        return products;
+    }
 }

@@ -15,6 +15,8 @@ public class Products
 
     [Column("category")] public string category { get; set; }
 
+    [Column("units_sold")] public int units_sold { get; set; }
+
     [Column("created_at")] public DateTime created_at { get; set; }
 
     [Column("updated_at")] public DateTime updated_at { get; set; }

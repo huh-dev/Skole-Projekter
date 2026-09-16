@@ -34,4 +34,10 @@ public static class Filters
     {
         return products.Where(p => p.name.Contains(str));
     }
+
+    //GET AMOUNT OF UNITS SOLD FOR A CATEGORY
+    public static Dictionary<string, int> GetAmountOfUnitsSoldForCategory(this IQueryable<Products> products)
+    {
+        return products.GroupBy(p => p.category).ToDictionary(g => g.Key, g => g.Sum(p => p.units_sold));
+    }
 }

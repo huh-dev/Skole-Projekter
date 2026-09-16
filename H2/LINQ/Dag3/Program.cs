@@ -1,13 +1,15 @@
-﻿namespace LINQ.Dag3;
+﻿using LINQ.Dag3.Task;
+namespace LINQ.Dag3;
 
 public class Program
 {
     public static void Main(string[] args)
     {
 
-        var context = Database.Connect();
+        var database = Database.Connect();
 
         
+
 
     }
 

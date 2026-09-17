@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <name>Gaming Laptop</name>
+    <price>12500</price>
+    <category>Computer</category>
+  </Product>
+  <Product>
+    <name>Office Laptop</name>
+    <price>7500</price>
+    <category>Computer</category>
+  </Product>
+  <Product>
+    <name>Gaming Mus</name>
+    <price>650</price>
+    <category>Tilbehør</category>
+  </Product>
+  <Product>
+    <name>Keyboard</name>
+    <price>1100</price>
+    <category>Tilbehør</category>
+  </Product>
+  <Product>
+    <name>4K Skærm</name>
+    <price>4500</price>
+    <category>Skærm</category>
+  </Product>
+  <Product>
+    <name>Gaming Headset</name>
+    <price>1500</price>
+    <category>Tilbehør</category>
+  </Product>
+  <Product>
+    <name>27" Gaming Skærm</name>
+    <price>5500</price>
+    <category>Skærm</category>
+  </Product>
+  <Product>
+    <name>USB-C Dock</name>
+    <price>1800</price>
+    <category>Tilbehør</category>
+  </Product>
+  <Product>
+    <name>MacBook Air</name>
+    <price>9500</price>
+    <category>Computer</category>
+  </Product>
+  <Product>
+    <name>Gaming PC</name>
+    <price>15000</price>
+    <category>Computer</category>
+  </Product>
+  <Product>
+    <name>Webkamera</name>
+    <price>850</price>
+    <category>Tilbehør</category>
+  </Product>
+  <Product>
+    <name>32" 4K Skærm</name>
+    <price>5500</price>
+    <category>Skærm</category>
+  </Product>
+</ArrayOfProduct>

@@ -55,33 +55,31 @@ public class Program
         //Lambda expression if a product costs more than 5000 (BOOL)
         var isProductMoreThan5000 = (int price) => price > 5000;
 
-        //Lambda expression to get all products that costs more than 5000
+        /*
+        * Lambda expression to get all products that costs more than 5000
+        * We use a where here to filter the products based on a previous lanmda expression. This is not normally how i would do it.
+        * It would usually do the bool check inside the where clause itself.
+        */
         var productsMoreThan5000 = ProductsList.Where(p => isProductMoreThan5000(p.price));
 
-        // foreach (var product in productsMoreThan5000)
-        // {
-        //     Console.WriteLine($"{product.name} costs {product.price}");
-        // }
-
-        //Lambda expression to get products with a price over 10000 or have the category "Skærm"
+        /*
+        * Lambda expression to get products with a price over 10000 or have the category "Skærm"
+        * Here is how i would do it normally, but i would make an extension method for this, and take the category and price in as parameters, so it would be a more flexible, reuseable and dynamic solution / method.
+        */
         var productsOver10000OrCategorySkærm = ProductsList.Where(p => p.price > 10000 || p.category == "Skærm");
 
-        // foreach (var product in productsOver10000OrCategorySkærm)
-        // {
-        //     Console.WriteLine($"{product.name} costs {product.price} and is a {product.category}");
-        // }
-
-        // Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør"
+        /*
+        * Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør"
+        * Again this would also be nicer as a dynamic solution / method
+        */
         var ProductsBetween1000And10000NotTilbehør = ProductsList.Where(p => p.price > 1000 && p.price < 10000 && p.category != "Tilbehør");
 
-        // foreach (var product in ProductsBetween1000And10000NotTilbehør)
-        // {
-        //     Console.WriteLine($"{product.name} costs {product.price} and is a {product.category}");
-        // }
 
-        // Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør" and sort by price
-        var ProductsBetween1000And10000NotTilbehørSorted = ProductsList.Where(p =>
-            p.price > 1000 && p.price < 10000 && p.category != "Tilbehør").OrderBy(p => p.price);
+        /*
+        * Lambda expression to get procuts that costs between 1000 and 10000 and does not have the category "Tilbehør" and sort by price
+        * Here we have an orderby clause at the end, to sort the products. The orderby expression, so the 
+        */
+        var ProductsBetween1000And10000NotTilbehørSorted = ProductsList.Where(p => p.price > 1000 && p.price < 10000 && p.category != "Tilbehør").OrderBy(p => p.price);
         
         // foreach (var product in ProductsBetween1000And10000NotTilbehørSorted)
         // {
@@ -94,6 +92,9 @@ public class Program
     {
         
 
+        /**
+        * These are anonymous types, the way that these work is that the list is a list of objects
+        */
         var products = new[]
         { 
             new { Name = "Gaming Laptop", Category = "Computer", Price = 12500 },

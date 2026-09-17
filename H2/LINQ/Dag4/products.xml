@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Product>
-    <name>Gaming Laptop</name>
-    <price>12500</price>
-    <category>Computer</category>
-  </Product>
-  <Product>
     <name>Office Laptop</name>
     <price>7500</price>
     <category>Computer</category>
@@ -60,4 +55,19 @@
     <price>5500</price>
     <category>Skærm</category>
   </Product>
-</ArrayOfProduct>
+  <Product>
+    <name>Test</name>
+    <price>100</price>
+    <category>Test</category>
+  </Product>
+  <Product>
+    <name>Test</name>
+    <price>100</price>
+    <category>Test</category>
+  </Product>
+  <Product>
+    <name>Test</name>
+    <price>100</price>
+    <category>Test</category>
+  </Product>
+</ArrayOfProduct>rrayOfProduct>

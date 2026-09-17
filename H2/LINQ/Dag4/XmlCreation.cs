@@ -15,15 +15,22 @@ public static class XmlCreation
 
         //Serialize the products to the XML File
         var xml = new XmlSerializer(typeof(Product[]));
-        var stream = File.OpenWrite("products.xml");
+        using var stream = File.OpenWrite("products.xml");
         xml.Serialize(stream, PopulateXmlWithProducts());
         Console.WriteLine("XML created successfully");
+    }
+
+    public static void WriteXml(Product[] products)
+    {
+        var xml = new XmlSerializer(typeof(Product[]));
+        using var stream = File.OpenWrite("products.xml");
+        xml.Serialize(stream, products);
     }
 
     public static Product[] ReadXml()
     {
         var xml = new XmlSerializer(typeof(Product[]));
-        var stream = File.OpenRead("products.xml");
+        using var stream = File.OpenRead("products.xml");
         var products = xml.Deserialize(stream) as Product[];
         return products;
     }

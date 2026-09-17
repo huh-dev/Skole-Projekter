@@ -11,10 +11,10 @@ public class Program
         var products = XmlCreation.ReadXml();
 
         
-        var filteredProducts = products.FindAllProductsWithCategory("Computer");
-        foreach (var product in filteredProducts)
-        {
-            Console.WriteLine(product.name);
-        }
+        products = products.CreateProduct(new Product("Test", 100, "Test"));
+
+        var laptop = products.First(p => p.name == "Gaming Laptop");
+        products = products.DeleteProduct(laptop);
+        XmlCreation.WriteXml(products);
     }
 }

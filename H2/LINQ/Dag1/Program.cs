@@ -94,6 +94,7 @@ public class Program
 
         /**
         * These are anonymous types, the way that these work is that the list is a list of objects
+        * They are used for the purpose og being a type that we dont define them as strings, ints etc. but that is something that the compilers do
         */
         var products = new[]
         { 
@@ -101,6 +102,10 @@ public class Program
             new { Name = "Office Laptop", Category = "Computer", Price = 7500 },
         };
 
+        /**
+        * We use a select here, with a new object / instance of an anonymous type. 
+        * We do this to preview how it would work for a real use case where we dont need or dont want to know how the objects are structured.
+        */
         var results = products.Select(p => new { p.Name, p.Category, p.Price });
 
         foreach (var result in results)
@@ -114,13 +119,23 @@ public class Program
     //MARK: QUERY OPERATORS
     private static void QueryOperators()
     {
-        //Query syntax
+        /**
+        * This is the query syntax. We are using a from clause to iterate over the ProductsList, and a where clause to filter the products based on the category and price.
+        * We are then using an orderby clause to sort the products by price in descending order.
+        * We are then using a select clause to select the products.
+        * This is made to show how in C# we can use a more declarative approach to querying data, instead of using a more imperative approach.
+        */
         var expensiveProductsQuerySyntax = from product in ProductsList
                                 where product.category == "Computer" && product.price > 1000
                                 orderby product.price descending
                                 select product;
         
-        //Method syntax
+        /**
+        * This is the method syntax. We are using a where clause to filter the products based on the category and price.
+        * We are then using an orderby clause to sort the products by price in descending order.
+        * We are then using a select clause to select the products.
+        * This is made to show how in C# we can use a more imperative approach to querying data, instead of using a more declarative approach.
+        */
         var expensiveProductsMethodSyntax = ProductsList.Where(p => p.price > 1000 && p.category == "Computer").OrderBy(p => p.price);
 
         foreach (var product in expensiveProductsMethodSyntax)
@@ -141,6 +156,9 @@ public class Program
     //MARK: Query expression
     private static void QueryExpression()
     {
+        /**
+        * This is a query expression. Again it shows the same declarative approach to querying data, as the query syntax.
+        */
         IEnumerable<Product> expensiveProductsQueryExpression = from product in ProductsList
                                                                 orderby product.price descending
                                                                 select product;
@@ -155,6 +173,12 @@ public class Program
     private static void ExpressionTree()
     {
 
+        /**
+        * This is a simple expression that would be used in a larger tree. The tree would be used to compile the expression into a delegate
+        * That can be used in combination with other expressions to create a more complex tree with multiple conditions and parameters.
+        * This is a good example of how LINQ can be used with more of its functions, because inside the expression we have a lambda expression.
+        * Underneath we compile the expression, that then gives us a a IEnumberable<Product> that we can use to show the given result.
+        */
         Expression<Func<Product, bool>> isProductMoreThan5000 = p => p.price > 5000 && p.category == "Computer";
 
         var compliedExpression = isProductMoreThan5000.Compile();
@@ -167,6 +191,12 @@ public class Program
 
 public static class ExtensionMethods
 {
+    /**
+    * This is an extension method. It is a method that is added to a class, that is not part of the class itself.
+    * It is a way to add functionality to a class, without having to modify the class itself.
+    * It is a good example of how LINQ can be used with more of its functions, because inside the method we have a lambda expression.
+    * Underneath we use the Where method to filter the products based on the price.
+    */
     public static IEnumerable<Product> ExpensiveProducts(this List<Product> products)
     {
         return products.Where(p => p.price > 5000);

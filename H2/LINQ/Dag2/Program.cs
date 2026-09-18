@@ -26,7 +26,16 @@ class Program
 
     static void Main(string[] args)
     {
-        GenerateRapport();
+
+        var tags = Products.FindAllTagsFromAllProductsWithTags();
+        
+        foreach (var tag in tags)
+        {
+            Console.WriteLine($"  {tag}");
+        }
+
+
+        // GenerateRapport();
     }
 
     

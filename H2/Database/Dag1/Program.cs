@@ -12,7 +12,7 @@ class Program
 
         var connection = ConnectToDatabase();
 
-        InsertTables(connection);
+        connection.Execute();
     }
 
     public static MySqlConnection ConnectToDatabase()
@@ -30,13 +30,5 @@ class Program
         }
 
         return connection;
-    }
-
-    public static void InsertTables(MySqlConnection connection)
-    {
-
-        
-
-
     }
 }

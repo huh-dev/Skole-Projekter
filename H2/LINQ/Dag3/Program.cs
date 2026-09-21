@@ -32,12 +32,14 @@ public class Program
         //     "frameRate: 60 fps"
         // });
    
-        var product = database.Products.FindProductBySpecification("Lenovo");
+        // var product = database.Products.FindProductBySpecification("Lenovo");
 
-        foreach (var p in product)
-        {
-            Console.WriteLine("Product found: " + p.name);
-        }
+        // foreach (var p in product)
+        // {
+        //     Console.WriteLine("Product found: " + p.name);
+        // }
+
+        BarChart.CreateBarChart(database.Products);
 
         database.SaveChanges();
 

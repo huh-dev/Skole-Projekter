@@ -12,13 +12,15 @@ public class Program
 
         // products = products.CreateProduct(new Product("Test", 100, "Test"));
 
-        var _products = products.FindAllProductsWithCategory("Computer");
-        foreach (var product in _products)
-        {
-            Console.WriteLine(product.name);
-        }
+        // var _products = products.FindAllProductsWithCategory("Computer");
+        // foreach (var product in _products)
+        // {
+        //     Console.WriteLine(product.name);
+        // }
         // var laptop = products.First(p => p.name == "Gaming Laptop");
         // products = products.DeleteProduct(laptop);
+
+        
         XmlCreation.WriteXml(products);
     }
 }

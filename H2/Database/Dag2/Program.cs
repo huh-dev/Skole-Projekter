@@ -11,5 +11,7 @@ class Program
         {
             await Database.SeedData();
         }
+
+        
     }
 }

@@ -1,0 +1,30 @@
+[
+    {
+        "title": "The Hobbit",
+        "excerpt": "In a hole in the ground...",
+        "price": 129.5,
+        "date": "1937-09-21",
+        "author_id": 1
+    },
+    {
+        "title": "The Lord of the Rings",
+        "excerpt": "One Ring to rule them all...",
+        "price": 129.5,
+        "date": "1954-07-29",
+        "author_id": 1
+    },
+    {
+        "title": "A Game of Thrones",
+        "excerpt": "Winter is coming...",
+        "price": 129.5,
+        "date": "1996-08-06",
+        "author_id": 3
+    },
+    {
+        "title": "A Clash of Kings",
+        "excerpt": "Winter is coming...",
+        "price": 129.5,
+        "date": "1996-08-06",
+        "author_id": 3
+    }
+]

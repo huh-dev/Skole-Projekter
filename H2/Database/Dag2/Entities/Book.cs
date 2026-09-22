@@ -13,6 +13,8 @@ public partial class Book
 
     public float Price { get; set; }
 
+    public bool IsAvailable { get; set; }
+
     public DateTime Date { get; set; }
 
     public int? AuthorId { get; set; }

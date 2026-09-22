@@ -2,17 +2,10 @@ using Dag2.Entities;
 
 namespace Dag2.Services;
 
-public class LoanService
+public static class LoanService
 {
 
-    private readonly AppDbContext _context;
-
-    public LoanService(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public async Task<LoanedBook> Create(int userId, int bookId, int staffId, DateTime loanStart, DateTime loanEnd)
+    public static async Task<LoanedBook> Create(this AppDbContext context, int userId, int bookId, int staffId, DateTime loanStart, DateTime loanEnd)
     {
         if (loanStart > loanEnd)
         {
@@ -28,19 +21,19 @@ public class LoanService
             LoanEnd = loanEnd
         };
         
-        _context.LoanedBooks.Add(loan);
-        await _context.SaveChangesAsync();
+        context.LoanedBooks.Add(loan);
+        await context.SaveChangesAsync();
         return loan;
     }
 
-    public async Task<LoanedBook> GetById(int loanId, Staff? currentStaff)
+    public static async Task<LoanedBook> GetById(this AppDbContext context, int loanId, Staff? currentStaff)
     {
         if (currentStaff is null || string.IsNullOrWhiteSpace(currentStaff.Role))
         {
             throw new UnauthorizedAccessException("Kun staff kan se udlån.");
         }
 
-        return await _context.LoanedBooks.FindAsync(loanId);
+        return await context.LoanedBooks.FindAsync(loanId);
     }
 
 }

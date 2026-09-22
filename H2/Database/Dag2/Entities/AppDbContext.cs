@@ -82,6 +82,10 @@ public partial class AppDbContext : DbContext
                 .HasDefaultValueSql("'current_timestamp()'")
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
+            entity.Property(e => e.IsAvailable)
+                .HasDefaultValueSql("'1'")
+                .HasColumnType("tinyint(1)")
+                .HasColumnName("is_available");
             entity.Property(e => e.Date)
                 .HasColumnType("date")
                 .HasColumnName("date");

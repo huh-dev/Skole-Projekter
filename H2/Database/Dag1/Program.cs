@@ -15,6 +15,7 @@ class Program
         connection.Execute();
     }
 
+    //Simple connection to the database without the use of EF Core, this will come in later projects.
     public static MySqlConnection ConnectToDatabase()
     {
         var connectionString = "server=localhost;database=db_dag_1;user=root;password=";

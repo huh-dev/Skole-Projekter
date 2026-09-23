@@ -1,5 +1,6 @@
 ﻿namespace H2.Database.Dag3;
 using Input;
+using Services.Authorization;
 
 public static class Program
 {
@@ -8,7 +9,11 @@ public static class Program
 
         var context = Database.Connect();
 
-        Inserts.InsertAuthor(context);
+        ICurrentUserService currentUserService = new CurrentUserService();
+        currentUserService.SetUser("Alice");
+        IAuthorizationService authorizationService = new AuthorizationService(context, currentUserService);
+
+        Inserts.InsertAuthor(context, authorizationService);
 
 
     }

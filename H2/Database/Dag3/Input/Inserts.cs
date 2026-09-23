@@ -1,10 +1,12 @@
 using Dag3.Entities;
+using H2.Database.Dag3.Enums;
+using H2.Database.Dag3.Services.Authorization;
 namespace H2.Database.Dag3.Input;
 using Microsoft.EntityFrameworkCore;
 
 public static class Inserts
 {
-    public static void InsertAuthor(this AppDbContext db)
+    public static void InsertAuthor(this AppDbContext db, IAuthorizationService authorizationService)
     {
 
         Console.WriteLine("Write the name of the author");
@@ -14,6 +16,13 @@ public static class Inserts
         if (string.IsNullOrEmpty(name))
         {
             Console.WriteLine("Name is required");
+            return;
+        }
+
+        // Check that the user is authorized to insert an author
+        if (!authorizationService.IsAuthorizedAdmin(StaffRoles.Administrator))
+        {
+            Console.WriteLine("You are not authorized to insert an author");
             return;
         }
 

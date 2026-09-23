@@ -20,7 +20,7 @@ class Program
         // Logs.Save(DateTime.Now, "Create", loanedBook.Id.ToString(), "loaned_books");
 
         //Create the triggers
-        database.CreateTriggers();
+        // database.CreateTriggers();
 
         
     }

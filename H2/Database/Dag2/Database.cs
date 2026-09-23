@@ -13,7 +13,7 @@ public static class Database
         return new AppDbContext();
     }
 
-    //MARK: AUTHORS
+    //2. Seeding function
     public static async Task SeedData()
     {
         var database = Connect();

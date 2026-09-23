@@ -7,6 +7,7 @@ public class BookService
     public void SetPrice(float price)
     {
 
+        //Simple price check through if statement.
         if (price < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(price), "Prisen skal være større end 0.");

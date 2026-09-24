@@ -20,7 +20,7 @@ public static class Inserts
         }
 
         // Check that the user is authorized to insert an author
-        if (!authorizationService.IsAuthorizedAdmin(StaffRoles.Administrator))
+        if (!authorizationService.IsAuthorizedStaff())
         {
             Console.WriteLine("You are not authorized to insert an author");
             return;

@@ -9,7 +9,7 @@ public static class Updates
     {
         
         //Auth
-        if (!authorizationService.IsAuthorizedAdmin(StaffRoles.Administrator))
+        if (!authorizationService.IsAuthorizedStaff())
         {
             Console.WriteLine("You are not authorized to update an author");
             return;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 
 namespace H2.Database.Dag3;
 using Input;
@@ -25,22 +24,16 @@ public static class Program
         // try
         // {
         //     var author = Selects.GetSpecificAuthor(context, -1);
-
-
         //     if (author == null)
         //     {
         //         Console.WriteLine("Author not found");
         //         return;
         //     }
-
         //     Console.WriteLine($"Author: {author.Name}");
-
         // }
-        // catch (MySqlException ex)
+        // catch (Exception ex)
         // {
         //     Console.WriteLine(ex.Message);
         // }
-
-
     }
 }

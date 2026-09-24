@@ -24,20 +24,23 @@ public static class Updates
 
         if (author == null)
         {
-            throw new Exception("Author not found");
+            Console.WriteLine("Author not found");
+            return;
         }
 
         //The new name of the author
         Console.WriteLine("Write the new name of the author");
         string name = Console.ReadLine();
 
-        //Update the author
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Name is required");
+            return;
+        }
+
         author.Name = name;
         db.SaveChanges();
 
         Console.WriteLine("Author updated successfully");
-
-
-        
     }
 }

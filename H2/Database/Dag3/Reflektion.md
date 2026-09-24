@@ -30,8 +30,6 @@ Hvis jeg i stedet havde skrevet fx `INSERT INTO authors (name) VALUES ('" + name
 
 Jeg forstår SQL injection bedst som: “input må aldrig være en del af SQL-syntaksen – kun data sendt sikkert ind”. Det er derfor opgaven kræver en bevidst teknik, ikke bare at “gemme fra console”. EF Core er min teknik her, fordi den giver INSERT/UPDATE (og CALL til procedure) uden manuel string-building.
 
-Til mundtlig kan jeg vise flowet i `Program.cs` (kalder `InsertAuthor` / `UpdateAuthor`), forklare hvad brugeren taster, og pege på at SQL’en parameteriseres i EF/driver-laget – ikke at navnet kopieres ind i en rå INSERT-streng.
-
 3. Rettighedsstyring
 
 3.1 Least privilege og adgang
@@ -52,8 +50,6 @@ Handlinger i `Input`:
 - Read: `Selects.GetSpecificAuthor` – læser via stored procedure `GetSpecificAuthor` med parameteriseret id.
 - Update: `Updates.UpdateAuthor` – finder forfatter og opdaterer navn. Adgang: `IsAuthorizedStaff`.
 - Delete: `Deletes.DeleteAuthor` – kun admin via `IsAuthorizedAdmin`, derefter `Remove` + `SaveChanges`.
-
-Til mundtlig demo: `SetUser` med en librarian (fx fra `staff` i databasen) – create/read/update virker, delete afvises. Skift til en bruger med rolle `Administrator` – delete af en forfatter-record lykkes.
 
 3.2 Reflektion
 
@@ -96,4 +92,51 @@ Jeg håndhæver regler på to niveauer:
 2. DB som sikkerhedsnet – constraints og procedure-regler fanger det, der slipper igennem eller kommer ind uden om appen.
 
 Teknikkerne jeg bruger, er simple `IsNullOrEmpty`, `TryParse`/`Parse`, `FirstOrDefault` + null-tjek. Det er samme princip som Dag2 (regler i `Services`/`Input`), bare udvidet til det brugeren skriver i konsollen.
+
+5. Stored Procedures
+
+5.1 Valg og implementering
+
+En stored procedure er SQL-logik, der ligger gemt i databasen og kan kaldes med `CALL` (i mit projekt MySQL – samme idé som på SQL Server i opgaveteksten). Det giver mening at lægge noget i databasen, når regler eller queries kan ændres uden at recompile appen – fx hvordan vi henter en forfatter, eller validering der skal gælde uanset om data kommer fra EF, TablePlus eller en anden klient.
+
+Jeg har valgt at lægge read-logik for “hent forfatter på id” i en procedure, fordi det er en fast database-operation med tydelige regler for gyldigt id. CRUD med brugerinput og rettigheder bliver i C# (`Input` + `AuthorizationService`); proceduren er data/adgang, som DBA eller lærer kan rette i SQL-filen uden at røre `.cs`-filer.
+
+Procedure: `GetSpecificAuthor` i `StoredProcedures/stored_procedures.sql`
+
+- Parameter: `IN authorId int` – værdien sendes som parameter ved `CALL`, ikke som tekst i SQL-strengen (beskyttelse mod SQL injection når appen kalder den via `FromSqlRaw("CALL GetSpecificAuthor({0})", id)`).
+- Henter data: `SELECT * FROM Authors WHERE Id = authorId` (læser én forfatter).
+- Validering/fejl: `IF authorId IS NULL OR authorId <= 0 THEN SIGNAL SQLSTATE '45000' ...` – ugyldigt id stopper med fejl i stedet for stille at returnere forkert resultat.
+
+Deploy fra .NET (samme mønster som triggers i Dag2): `StoredProcedures.CreateStoredProcedures` læser SQL-filen og kører `ExecuteSqlRaw` ved opstart (`Program.cs`). Appen kalder proceduren gennem `Selects.GetSpecificAuthor`.
+
+5.2 Reflektion
+
+En stored procedure er en genbrugelig “funktion” i databasen: `CREATE PROCEDURE`, parametre (`IN`), `BEGIN`/`END`, og kontrolstrukturer som `IF`/`THEN`/`END IF`. Her bruger jeg `SIGNAL` til fejlhåndtering – det svarer til at kaste en fejl, som appen kan fange (fx `MySqlException` i `Program.cs`).
+
+Fordelen ved at have `GetSpecificAuthor` i DB er, at validering af id og selve SELECT’en ligger ét sted. Hvis biblioteket senere vil join’e flere tabeller i “hent forfatter”-viewet, kan man opdatere proceduren og deploye SQL igen, så længe signatur og `CALL` stadig matcher.
+
+6. Fejlhåndtering
+
+6.1 Database-exceptions i appen
+
+Når kode taler med en database, kommer fejl sjældent som “almindelige” C#-fejl alene. EF Core og MySQL-brugeren giver exceptions, som hører til database-laget – dem skal appen fange og oversætte til beskeder brugeren forstår.
+
+De vigtigste i mit projekt:
+
+- `DbUpdateException` (EF Core) – kastes når `SaveChanges`/`SaveChangesAsync` fejler, fx ved `FOREIGN KEY`, `NOT NULL` eller andre constraints. Ofte ligger den rigtige MySQL-fejl i `InnerException`.
+- MySQL-driver exception (fx fra `MySqlConnector`/`MySql.Data` via EF) connection fejl, SQL-syntaks, eller `SIGNAL` fra stored procedure (`ID must be greater than 0`).
+- `InvalidOperationException` – fx hvis connection string mangler i `AppDbContext` (opsætning før DB-kald).
+
+Implementering:
+
+- `Program.cs` – `try`/`catch` omkring `Selects.GetSpecificAuthor(context, -1)`. Procedurens `SIGNAL` giver en database-relateret exception; i `catch` skriver jeg `ex.Message`, så brugeren fx ser `ID must be greater than 0` i stedet for et crash.
+- Ved `SaveChanges` i `Input` lader jeg EF kaste `DbUpdateException`, hvis constraints fejler (fx slet forfatter med bøger). Det kan man fange på samme måde med `catch (DbUpdateException ex)` og `Console.WriteLine(ex.InnerException?.Message ?? ex.Message)` – jeg har valgt ikke at duplikere try/catch i hver metode, når demoen i `Program` viser princippet.
+
+App-validering (tomt navn, ugyldigt id, author not found) giver beskeder uden exception. Database-exceptions handler jeg om, når fejlen kommer fra DB/framework.
+
+6.2 Reflektion
+
+Exception-håndtering mod databaser er vigtig, fordi fejl fra MySQL/EF ofte kommer som `DbUpdateException` eller inner MySQL-fejl – ikke som tekst brugeren forstår. Et `catch` omkring database-kald giver en meningsfuld besked (`ex.Message` eller inner exception).
+
+Jeg bruger `Console.WriteLine` + `return` til forventede fejl i input (punkt 4). Til procedure-demo fanger jeg den exception, databasen sender tilbage, når id er ugyldigt. Man kunne udvide med `catch (DbUpdateException)` omkring `SaveChanges`, hvis man vil vise constraint-fejl ved delete – samme teknik.
 

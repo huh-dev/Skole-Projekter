@@ -10,6 +10,7 @@
     "postinstall": "prisma generate && nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/i18n": "^10.6.0",
     "@prisma/adapter-mariadb": "^7.10.0",
     "@prisma/client": "7",
     "@tailwindcss/vite": "^4.3.3",

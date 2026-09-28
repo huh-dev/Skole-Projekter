@@ -1,0 +1,15 @@
+{
+  "title": "Database oversigt",
+  "titleNote": "(Denne overskrift ændrer sig ikke.)",
+  "tableLabel": "Tabel",
+  "loading": "Henter data...",
+  "empty": "Ingen rækker.",
+  "tables": {
+    "authors": "Forfattere",
+    "books": "Bøger",
+    "users": "Brugere",
+    "staff": "Personale",
+    "loans": "Udlån",
+    "logs": "Udlånslog"
+  }
+}

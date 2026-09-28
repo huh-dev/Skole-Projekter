@@ -1,0 +1,15 @@
+{
+  "title": "Database overview",
+  "titleNote": "(This heading does not change.)",
+  "tableLabel": "Table",
+  "loading": "Loading data...",
+  "empty": "No rows.",
+  "tables": {
+    "authors": "Authors",
+    "books": "Books",
+    "users": "Users",
+    "staff": "Staff",
+    "loans": "Loans",
+    "logs": "Loan log"
+  }
+}

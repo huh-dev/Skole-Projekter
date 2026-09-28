@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Author {
+  id        Int      @id @default(autoincrement())
+  name      String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  books     Book[]
+
+  @@map("authors")
+}
+
+model Book {
+  id          Int          @id @default(autoincrement())
+  title       String       @db.VarChar(255)
+  excerpt     String       @db.VarChar(255)
+  price       Float
+  date        DateTime     @db.Date
+  authorId    Int?         @map("author_id")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  isAvailable Boolean      @default(true) @map("is_available")
+  author      Author?      @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  loans       LoanedBook[]
+
+  @@index([authorId])
+  @@map("books")
+}
+
+model User {
+  id        Int          @id @default(autoincrement())
+  name      String       @db.VarChar(255)
+  email     String       @db.VarChar(255)
+  createdAt DateTime     @default(now()) @map("created_at")
+  loans     LoanedBook[]
+
+  @@map("users")
+}
+
+model Staff {
+  id        Int          @id @default(autoincrement())
+  name      String?      @db.VarChar(255)
+  role      String?      @db.VarChar(255)
+  createdAt DateTime     @default(now()) @map("created_at")
+  loans     LoanedBook[]
+
+  @@map("staff")
+}
+
+model LoanedBook {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  bookId    Int      @map("book_id")
+  staffId   Int      @map("staff_id")
+  loanStart DateTime @map("loan_start")
+  loanEnd   DateTime @map("loan_end")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Restrict)
+  staff     Staff    @relation(fields: [staffId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([bookId])
+  @@index([staffId])
+  @@map("loaned_books")
+}
+
+model LoanLog {
+  id        Int      @id @default(autoincrement())
+  loanId    Int      @map("loan_id")
+  bookId    Int      @map("book_id")
+  userId    Int      @map("user_id")
+  action    String   @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("loan_log")
+}

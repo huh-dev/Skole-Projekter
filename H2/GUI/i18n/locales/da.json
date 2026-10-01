@@ -12,6 +12,13 @@
   "loading": "Henter data...",
   "empty": "Ingen rækker.",
   "errorTitle": "Kunne ikke hente data",
+  "databaseService": {
+    "title": "Database service",
+    "tableCount": "{count} tabeller",
+    "rowCount": "Antal rækker",
+    "live": "Live",
+    "error": "Kunne ikke hente databaseoversigten"
+  },
   "tables": {
     "authors": "Forfattere",
     "books": "Bøger",

@@ -19,6 +19,14 @@ Apply migrations (requires a running MySQL server and database):
 bunx prisma migrate deploy
 ```
 
+## UI (shadcn-vue)
+
+This project uses [shadcn-vue](https://www.shadcn-vue.com/docs/installation/nuxt) with the `shadcn-nuxt` module. Add more components:
+
+```bash
+bun x shadcn-vue@latest add <component>
+```
+
 ## Development
 
 ```bash

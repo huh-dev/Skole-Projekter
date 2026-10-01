@@ -1,9 +1,17 @@
 {
   "title": "Database overview",
   "titleNote": "(This heading does not change.)",
+  "tablePageNote": "Data loaded from the database.",
+  "nav": {
+    "label": "Navigation menu",
+    "home": "Home",
+    "hint": "Use the menu above to browse the library tables.",
+    "language": "Language"
+  },
   "tableLabel": "Table",
   "loading": "Loading data...",
   "empty": "No rows.",
+  "errorTitle": "Could not load data",
   "tables": {
     "authors": "Authors",
     "books": "Books",

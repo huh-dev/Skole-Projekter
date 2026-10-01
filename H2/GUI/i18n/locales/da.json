@@ -1,9 +1,17 @@
 {
   "title": "Database oversigt",
   "titleNote": "(Denne overskrift ændrer sig ikke.)",
+  "tablePageNote": "Data hentet fra databasen.",
+  "nav": {
+    "label": "Navigationsmenu",
+    "home": "Home",
+    "hint": "Brug menuen ovenfor til at navigere mellem bibliotekets tabeller.",
+    "language": "Sprog"
+  },
   "tableLabel": "Tabel",
   "loading": "Henter data...",
   "empty": "Ingen rækker.",
+  "errorTitle": "Kunne ikke hente data",
   "tables": {
     "authors": "Forfattere",
     "books": "Bøger",

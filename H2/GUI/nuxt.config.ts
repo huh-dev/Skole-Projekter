@@ -2,6 +2,13 @@
 import tailwindcss from '@tailwindcss/vite'
 import type { Plugin } from 'vite'
 
+const EXCLUDED_PAGE_FOLDERS = ['/CustomControls/', '/PartialView/']
+
+function isExerciseFolder(file: string | undefined) {
+  const normalized = file?.replaceAll('\\', '/') ?? ''
+  return EXCLUDED_PAGE_FOLDERS.some(folder => normalized.includes(folder))
+}
+
 function rekaPrimitiveAttrs(): Plugin {
   return {
     name: 'reka-primitive-attrs',
@@ -32,6 +39,17 @@ export default defineNuxtConfig({
       tailwindcss(),
       rekaPrimitiveAttrs(),
     ],
+  },
+  components: [
+    { path: '~/pages/CustomControls', pathPrefix: false },
+    { path: '~/pages/PartialView', pathPrefix: false },
+    '~/components',
+  ],
+  hooks: {
+    'pages:extend'(pages) {
+      const kept = pages.filter(page => !isExerciseFolder(page.file))
+      pages.splice(0, pages.length, ...kept)
+    },
   },
   i18n: {
     defaultLocale: 'da',

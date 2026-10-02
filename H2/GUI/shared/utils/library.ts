@@ -1,3 +1,5 @@
+//These are generel types and utilities for the application, in one file for ease of use.
+
 export const LIBRARY_TABLES = [
   'authors',
   'books',

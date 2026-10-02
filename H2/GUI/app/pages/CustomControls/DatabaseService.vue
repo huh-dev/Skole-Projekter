@@ -100,6 +100,7 @@ const changedTables = ref<LibraryTable[]>([])
 const knownCounts = new Map<LibraryTable, number>()
 let highlightTimer = 0
 
+//Super simple way to highlight the tables that have changed.
 watch(overview, (next) => {
   if (!next) {
     return

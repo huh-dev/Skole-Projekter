@@ -2,27 +2,16 @@ import type { LibraryOverview } from '#shared/utils/library'
 
 let refreshInFlight: Promise<void> | null = null
 
-function readErrorMessage(cause: unknown) {
-  if (cause && typeof cause === 'object' && 'statusMessage' in cause) {
-    const statusMessage = (cause as { statusMessage?: unknown }).statusMessage
-    if (typeof statusMessage === 'string' && statusMessage.length > 0) {
-      return statusMessage
-    }
-  }
-
-  if (cause instanceof Error && cause.message) {
-    return cause.message
-  }
-
-  return 'Request failed'
-}
-
 export function useDatabaseService() {
+
+  //States for the overview. This keep tracks of error, pending request and the overview itself.
   const overview = useState<LibraryOverview | null>('library-overview', () => null)
   const loadError = useState<string | null>('library-overview-error', () => null)
   const pending = useState('library-overview-pending', () => true)
 
   async function refresh() {
+    
+    //If a request is already in flight, return the promise.
     if (refreshInFlight) {
       return refreshInFlight
     }
@@ -34,8 +23,8 @@ export function useDatabaseService() {
         overview.value = next
         loadError.value = null
       })
-      .catch((cause: unknown) => {
-        loadError.value = readErrorMessage(cause)
+      .catch(() => {
+        loadError.value = 'Request failed'
       })
       .finally(() => {
         pending.value = false

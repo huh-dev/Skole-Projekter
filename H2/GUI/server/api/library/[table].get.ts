@@ -1,3 +1,6 @@
+//This is a smarter way for us to get the table dynamically, so we can call it in one file instead of having to create a new file for each table.
+//These calls are made through prisma, which is our ORM.
+
 const queries = {
   authors: () => prisma.author.findMany(),
   books: () => prisma.book.findMany(),

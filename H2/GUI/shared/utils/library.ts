@@ -1,3 +1,5 @@
+//These are generel types and utilities for the application, in one file for ease of use.
+
 export const LIBRARY_TABLES = [
   'authors',
   'books',
@@ -20,4 +22,14 @@ export const LIBRARY_TABLE_PATHS: Record<LibraryTable, string> = {
 
 export function isLibraryTable(value: string): value is LibraryTable {
   return (LIBRARY_TABLES as readonly string[]).includes(value)
+}
+
+export interface LibraryTableStat {
+  table: LibraryTable
+  rowCount: number
+}
+
+export interface LibraryOverview {
+  tableCount: number
+  tables: LibraryTableStat[]
 }

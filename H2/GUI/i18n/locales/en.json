@@ -12,6 +12,13 @@
   "loading": "Loading data...",
   "empty": "No rows.",
   "errorTitle": "Could not load data",
+  "databaseService": {
+    "title": "Database service",
+    "tableCount": "{count} tables",
+    "rowCount": "Row count",
+    "live": "Live",
+    "error": "Could not load the database overview"
+  },
   "tables": {
     "authors": "Authors",
     "books": "Books",

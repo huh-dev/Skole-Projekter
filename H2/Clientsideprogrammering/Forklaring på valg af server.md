@@ -1,0 +1,5 @@
+Jeg startede ud med at lave en JS-backend i `server` med `Elysia` som framework. `Elysia` er et webframework i stil med `Express.js` og er bygget til `Bun`. I Elysias eget benchmark er det omkring 16 gange hurtigere end Express på Node til simple requests, fordi Bun er runtime, og Elysia bruger statisk kodeanalyse.
+
+Grunden til, at denne backend stadig findes, er, at jeg startede med at bygge min backend i `Elysia`, men kiggede tilbage til første opgave og så valget mellem Minimal API og Controller-based API. Dette er ikke muligt i `Elysia`, så jeg blev nødt til at fortsætte i `server-c#` gennem ASP.NET og gøre brug af en Minimal API-løsning.
+
+`Elysia` har endpoints, en GUI med oversigt og slet, og sorterer filnavnene med pakken `linq` i `listUploadedFiles`. Den løser ikke alle krav. Valget mellem Minimal API og Controller-based API findes i ASP.NET, og opgavens LINQ er C#-LINQ i `ListFileNames`. Jeg ville ikke slette den, eftersom den allerede er lavet, og den viser forskellen mellem de to sprog. Det er også den form for backends, jeg arbejder med i dagligdagen. Tag udgangspunkt i C#-backenden, eftersom det er den, som løser opgaven mere fuldstændigt.

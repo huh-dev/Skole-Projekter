@@ -7,14 +7,12 @@ public sealed class FileStorage
 
     private readonly string _uploadsPath;
 
-    //Constructor for the file storage.
     public FileStorage(string uploadsPath)
     {
         _uploadsPath = Path.GetFullPath(uploadsPath);
         Directory.CreateDirectory(_uploadsPath);
     }
 
-    // Store function for the file, to store it asyncronously.
     public async Task<UploadResult> StoreAsync(Stream content, string fileName)
     {
         if (!TryResolveFilePath(fileName, out string filePath))
@@ -22,13 +20,14 @@ public sealed class FileStorage
             throw new ArgumentException("File name is not allowed.", nameof(fileName));
         }
 
+        //Copy into a new file and await it, so the stream is not closed before the copy finishes.
+        //https://stackoverflow.com/questions/39322085/how-to-save-iformfile-to-disk
         await using FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
         await content.CopyToAsync(stream);
 
         return new UploadResult("File uploaded", fileName);
     }
 
-    //List function for the files in the storage.
     public IReadOnlyList<string> ListFileNames()
     {
         return Directory.EnumerateFiles(_uploadsPath)
@@ -39,7 +38,6 @@ public sealed class FileStorage
             .ToArray();
     }
 
-    //Delete function for the files in the storage.
     public bool Delete(string fileName)
     {
         if (!TryResolveExistingFile(fileName, out string filePath))
@@ -51,7 +49,6 @@ public sealed class FileStorage
         return true;
     }
 
-    //Try to resolve the existing file in the storage.
     public bool TryResolveExistingFile(string fileName, out string filePath)
     {
         if (!TryResolveFilePath(fileName, out filePath))
@@ -69,6 +66,8 @@ public sealed class FileStorage
             return false;
         }
 
+        //Reject a name that still contains a directory, so it cannot leave the uploads folder.
+        //https://stackoverflow.com/questions/14144933/checking-file-path-when-deleting-a-file
         if (fileName != Path.GetFileName(fileName) || fileName is "." or "..")
         {
             return false;
@@ -94,6 +93,8 @@ public sealed class FileStorage
             return false;
         }
 
+        //Require the uploads folder plus a separator, so "uploads" does not match "uploads-other".
+        //https://stackoverflow.com/questions/22671180/how-to-check-effectively-if-one-path-is-a-child-of-another-path-in-c
         string candidate = Path.GetFullPath(Path.Combine(_uploadsPath, fileName));
         string root = _uploadsPath.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
 

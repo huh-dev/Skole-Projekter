@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Server;
 
-// We start by creating the builder object.
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Get the uploads path
 string uploadsPath = Path.Combine(builder.Environment.ContentRootPath, "uploads");
 
-// Use this in a singleton service to avoid creating a new instance for each request.
+//Keep one storage instance for every request.
+//https://stackoverflow.com/questions/38138100/addtransient-addscoped-and-addsingleton-services-differences
 builder.Services.AddSingleton(new FileStorage(uploadsPath));
 
-// Add CORS to allow requests from any origin.
+//Allow the separate client page to call this server.
+//https://stackoverflow.com/questions/44379560/how-to-enable-cors-in-asp-net-core-webapi
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -21,22 +21,21 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Build the application.
 WebApplication app = builder.Build();
 
-// Use CORS.
 app.UseCors();
 
-// Use default and static files.
+//Rewrite "/" to index.html before the static files middleware serves it.
+//https://stackoverflow.com/questions/53988848/why-does-order-between-usestaticfiles-and-usedefaultfiles-matter
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
 FileExtensionContentTypeProvider contentTypes = new FileExtensionContentTypeProvider();
 
-//Create the new upload endpoint.
+//Bind the uploaded file, and skip the antiforgery token this endpoint does not receive.
+//https://stackoverflow.com/questions/77189996/upload-files-to-a-minimal-api-endpoint-in-net-8
 app.MapPost("/upload", async (IFormFile? file, FileStorage storage) =>
 {
-    //Check if the file is null, empty, too large, or not a safe file name.
     if (file is null || file.Length == 0)
     {
         return Results.BadRequest(new { message = "No file uploaded" });
@@ -52,21 +51,14 @@ app.MapPost("/upload", async (IFormFile? file, FileStorage storage) =>
         return Results.BadRequest(new { message = "File name is not allowed" });
     }
 
-    //Open the file and read the content.
     await using Stream content = file.OpenReadStream();
-
-    //Store the file in the storage.
     UploadResult result = await storage.StoreAsync(content, file.FileName);
-
-    //Return the result.
     return Results.Ok(result);
 
 }).DisableAntiforgery();
 
-//Simple endpoint for getting the files already uploaded
 app.MapGet("/files", (FileStorage storage) => storage.ListFileNames());
 
-//Delete a file by name, we use a dynamic route to get the file name from the url/request.
 app.MapDelete("/files/{fileName}", (string fileName, FileStorage storage) =>
 {
     if (!storage.Delete(fileName))
@@ -77,24 +69,23 @@ app.MapDelete("/files/{fileName}", (string fileName, FileStorage storage) =>
     return Results.Ok(new { message = "File deleted" });
 });
 
-//Download a file by name, we use again the same dynamic route method as earlier.
 app.MapGet("/download/{fileName}", (string fileName, FileStorage storage) =>
 {
-    //Check if the file exists.
     if (!storage.TryResolveExistingFile(fileName, out string filePath))
     {
         return Results.NotFound();
     }
 
-    //Get the content type of the file.
+    //Look up the type from the extension, and fall back when the extension is unknown.
+    //https://stackoverflow.com/questions/34131326/using-mimemapping-in-asp-net-core
     if (!contentTypes.TryGetContentType(filePath, out string? contentType))
     {
         contentType = "application/octet-stream";
     }
 
-    //Return the file.
+    //Send the file with its name so the browser saves it.
+    //https://stackoverflow.com/questions/42460198/return-file-in-asp-net-core-web-api
     return Results.File(filePath, contentType, fileName);
 });
 
-//The URL the server will run on.
 app.Run($"http://localhost:3000");

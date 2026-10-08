@@ -4,7 +4,6 @@ function setStatus(message) {
     document.getElementById('status').textContent = message
 }
 
-//Create one file row and reuse it for every file in the list.
 function createFileRow(fileName) {
     const row = document.createElement('div')
 
@@ -33,26 +32,21 @@ function renderFileList(fileNames) {
     document.getElementById('fileList').replaceChildren(fragment)
 }
 
-//Load the files that are already uploaded.
 async function loadFiles() {
     try {
-        //Get the file names from the server.
         const response = await fetch('/files')
         if (!response.ok) {
             setStatus('Kunne ikke hente filerne.')
             return
         }
 
-        //Show the list.
         renderFileList(await response.json())
     } catch (error) {
         setStatus('Kunne ikke hente filerne.')
     }
 }
 
-//Delete a file by name without reloading the whole list.
 async function deleteFile(fileName, row, button) {
-    //Disable the button so the same file is not deleted twice.
     button.disabled = true
 
     try {

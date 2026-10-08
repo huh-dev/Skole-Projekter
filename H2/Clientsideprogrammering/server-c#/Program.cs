@@ -36,10 +36,20 @@ FileExtensionContentTypeProvider contentTypes = new FileExtensionContentTypeProv
 //Create the new upload endpoint.
 app.MapPost("/upload", async (IFormFile? file, FileStorage storage) =>
 {
-    //Check if the file is null, empty, or not a safe file name.
-    if (file is null || file.Length == 0 || !FileStorage.IsSafeFileName(file.FileName))
+    //Check if the file is null, empty, too large, or not a safe file name.
+    if (file is null || file.Length == 0)
     {
         return Results.BadRequest(new { message = "No file uploaded" });
+    }
+
+    if (file.Length > FileStorage.MaxFileBytes)
+    {
+        return Results.BadRequest(new { message = "File is too large" });
+    }
+
+    if (!FileStorage.IsSafeFileName(file.FileName))
+    {
+        return Results.BadRequest(new { message = "File name is not allowed" });
     }
 
     //Open the file and read the content.
@@ -59,7 +69,12 @@ app.MapGet("/files", (FileStorage storage) => storage.ListFileNames());
 //Delete a file by name, we use a dynamic route to get the file name from the url/request.
 app.MapDelete("/files/{fileName}", (string fileName, FileStorage storage) =>
 {
-    return Results.Ok(storage.Delete(fileName));
+    if (!storage.Delete(fileName))
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(new { message = "File deleted" });
 });
 
 //Download a file by name, we use again the same dynamic route method as earlier.

@@ -2,6 +2,8 @@ namespace Server;
 
 public sealed class FileStorage
 {
+    public const long MaxFileBytes = 5 * 1024 * 1024;
+    public const int MaxFileNameLength = 255;
 
     private readonly string _uploadsPath;
 
@@ -32,6 +34,7 @@ public sealed class FileStorage
         return Directory.EnumerateFiles(_uploadsPath)
             .Select(Path.GetFileName)
             .OfType<string>()
+            .Where(IsSafeFileName)
             .OrderBy(fileName => fileName, StringComparer.OrdinalIgnoreCase)
             .ToArray();
     }
@@ -59,11 +62,34 @@ public sealed class FileStorage
         return File.Exists(filePath);
     }
 
+    public static bool IsSafeFileName(string? fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName) || fileName.Length > MaxFileNameLength || fileName != fileName.Trim())
+        {
+            return false;
+        }
+
+        if (fileName != Path.GetFileName(fileName) || fileName is "." or "..")
+        {
+            return false;
+        }
+
+        foreach (char character in fileName)
+        {
+            if (character is '/' or '\\' or '<' or '>' or '"' or '|' or ':' or '*' or '?' || char.IsControl(character))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private bool TryResolveFilePath(string fileName, out string filePath)
     {
         filePath = string.Empty;
 
-        if (string.IsNullOrWhiteSpace(fileName) || fileName != Path.GetFileName(fileName))
+        if (!IsSafeFileName(fileName))
         {
             return false;
         }

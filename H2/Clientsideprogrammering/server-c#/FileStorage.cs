@@ -5,6 +5,8 @@ public sealed class FileStorage
     public const long MaxFileBytes = 5 * 1024 * 1024;
     public const int MaxFileNameLength = 255;
 
+    private static readonly string[] AllowedExtensions = [".txt", ".pdf", ".doc", ".docx", ".csv"];
+
     private readonly string _uploadsPath;
 
     public FileStorage(string uploadsPath)
@@ -34,6 +36,7 @@ public sealed class FileStorage
             .Select(Path.GetFileName)
             .OfType<string>()
             .Where(IsSafeFileName)
+            .Where(IsAllowedFileType)
             .OrderBy(fileName => fileName, StringComparer.OrdinalIgnoreCase)
             .ToArray();
     }
@@ -84,11 +87,30 @@ public sealed class FileStorage
         return true;
     }
 
+    public static bool IsAllowedFileType(string? fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            return false;
+        }
+
+        string extension = Path.GetExtension(fileName);
+        foreach (string allowedExtension in AllowedExtensions)
+        {
+            if (string.Equals(extension, allowedExtension, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private bool TryResolveFilePath(string fileName, out string filePath)
     {
         filePath = string.Empty;
 
-        if (!IsSafeFileName(fileName))
+        if (!IsSafeFileName(fileName) || !IsAllowedFileType(fileName))
         {
             return false;
         }

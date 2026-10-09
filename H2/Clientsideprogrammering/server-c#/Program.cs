@@ -51,6 +51,11 @@ app.MapPost("/upload", async (IFormFile? file, FileStorage storage) =>
         return Results.BadRequest(new { message = "File name is not allowed" });
     }
 
+    if (!FileStorage.IsAllowedFileType(file.FileName))
+    {
+        return Results.BadRequest(new { message = "File type is not allowed" });
+    }
+
     await using Stream content = file.OpenReadStream();
     UploadResult result = await storage.StoreAsync(content, file.FileName);
     return Results.Ok(result);

@@ -16,11 +16,11 @@ Controller-based API samler ruter i en klasse med actions. Minimal API skriver r
 
 - Vis et eksempel på, hvordan appen bruger render tree til at opdatere DOM.
 
-`loadFiles` bygger linkene i et `DocumentFragment` og sætter dem ind én gang med `replaceChildren`. Efter upload tilføjer `addFileLink` kun det nye link.
+`loadFiles` bygger linkene i et `DocumentFragment` og sætter dem ind én gang med `$('#fileList').empty().append(fragment)`. Efter upload tilføjer `addFileLink` kun det nye link.
 
 - Vis hvor jQuery-implementationerne er, og hvordan de fungerer for kravene i øvelsen.
 
-`$(function () { ... })` kalder `loadFiles`. Klik på `#uploadButton` uploader. Klik på et link downloader. Kaldene er `fetch`. `addFileLink` opdaterer kun den nye fil.
+`$(function () { ... })` kalder `loadFiles`. Klik på `#uploadButton` uploader. Klik på `a.file-link` downloader. `#status` opdateres med `.text()`, og `#fileList .file-link` finder de links, der allerede er vist. Kaldene er `fetch`. `addFileLink` opdaterer kun den nye fil.
 
 - Vis i koden, hvad du har gjort for performance.
 
@@ -28,4 +28,4 @@ Fragmentet tegner ikke siden om per fil. Upload henter ikke listen igen. `addFil
 
 - Vis i koden, hvad du har gjort for sikkerhed.
 
-`Program.cs` afviser tom fil, fil over 5 MB og usikkert navn, før den skriver. Klientens tjek er kun til GUI. Navne sættes med `textContent`. `TryResolveFilePath` holder stien i `uploads`.
+`Program.cs` afviser tom fil, fil over 5 MB, usikkert navn og filtype, før den skriver. Tilladte typer er `.txt`, `.pdf`, `.doc`, `.docx` og `.csv`. Klientens tjek er kun til GUI. Navne sættes med jQuery `.text()`. `TryResolveFilePath` holder stien i `uploads` og afviser andre filtyper.

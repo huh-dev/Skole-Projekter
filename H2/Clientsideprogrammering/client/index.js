@@ -4,6 +4,7 @@ $(function () {
 })
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024
+const ALLOWED_EXTENSIONS = ['.txt', '.pdf', '.doc', '.docx', '.csv']
 
 function isSafeFileName(fileName) {
     return !!fileName
@@ -14,29 +15,32 @@ function isSafeFileName(fileName) {
         && !/[\\/\u0000-\u001F\u007F<>"|:*?]/.test(fileName)
 }
 
+function isAllowedFileType(fileName) {
+    const dot = fileName.lastIndexOf('.')
+    return dot >= 0 && ALLOWED_EXTENSIONS.includes(fileName.slice(dot).toLowerCase())
+}
+
 //Show a message as text so it is not parsed as HTML.
 //https://stackoverflow.com/a/68198131
 function setStatus(message) {
-    document.getElementById('status').textContent = message
+    $('#status').text(message)
 }
 
 function addFileLink(parent, fileName) {
-    const link = document.createElement('a')
-    link.href = '#'
+    const link = $('<a>', { href: '#', class: 'file-link' })
     //https://stackoverflow.com/a/68198131
-    link.textContent = fileName
-    $(link).on('click', function (event) {
+    link.text(fileName)
+    link.on('click', function (event) {
         event.preventDefault()
         downloadFile(fileName)
     })
 
-    parent.appendChild(link)
-    parent.appendChild(document.createElement('br'))
+    $(parent).append(link, $('<br>'))
 }
 
 async function uploadFile() {
-    const fileInput = document.getElementById('fileInput')
-    const file = fileInput.files[0]
+    const fileInput = $('#fileInput')
+    const file = fileInput.prop('files')[0]
 
     if (!file) {
         setStatus('Vælg en fil først.')
@@ -58,13 +62,18 @@ async function uploadFile() {
         return
     }
 
+    if (!isAllowedFileType(file.name)) {
+        setStatus('Filtypen er ikke tilladt.')
+        return
+    }
+
     //Build the form data and post the file without setting Content-Type.
     //https://stackoverflow.com/a/40826943
     const formData = new FormData()
     formData.append('file', file)
 
-    const uploadButton = document.getElementById('uploadButton')
-    uploadButton.disabled = true
+    const uploadButton = $('#uploadButton')
+    uploadButton.prop('disabled', true)
 
     try {
         const response = await fetch('http://localhost:3000/upload', {
@@ -78,11 +87,11 @@ async function uploadFile() {
         }
 
         const data = await response.json()
-        const fileList = document.getElementById('fileList')
+        const fileList = $('#fileList')
         let alreadyListed = false
 
-        fileList.querySelectorAll('a').forEach(link => {
-            if (link.textContent === data.fileName) {
+        fileList.find('a.file-link').each(function () {
+            if ($(this).text() === data.fileName) {
                 alreadyListed = true
             }
         })
@@ -91,13 +100,13 @@ async function uploadFile() {
             addFileLink(fileList, data.fileName)
         }
 
-        fileInput.value = ''
+        fileInput.val('')
         setStatus('Filen er uploadet.')
     } catch (error) {
         console.error('Error:', error)
         setStatus('Upload mislykkedes.')
     } finally {
-        uploadButton.disabled = false
+        uploadButton.prop('disabled', false)
     }
 }
 
@@ -112,14 +121,14 @@ async function loadFiles() {
         //Build the links in a fragment so the page is not redrawn for every file.
         //https://stackoverflow.com/questions/62776700/why-is-that-using-a-document-fragment-can-improve-performance
         const fileNames = await response.json()
-        const fileList = document.getElementById('fileList')
+        const fileList = $('#fileList')
         const fragment = document.createDocumentFragment()
 
         fileNames.forEach(fileName => {
             addFileLink(fragment, fileName)
         })
 
-        fileList.replaceChildren(fragment)
+        fileList.empty().append(fragment)
     } catch (error) {
         console.error('Error:', error)
         setStatus('Kunne ikke hente filerne.')
@@ -139,11 +148,11 @@ async function downloadFile(fileName) {
         //https://stackoverflow.com/a/73787076
         const blob = await response.blob()
         const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = fileName
-        document.body.appendChild(link)
-        link.click()
+        const link = $('<a>')
+        link.attr('href', url)
+        link.attr('download', fileName)
+        $('body').append(link)
+        link.get(0).click()
         URL.revokeObjectURL(url)
         link.remove()
     } catch (error) {

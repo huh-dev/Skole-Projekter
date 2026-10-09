@@ -14,8 +14,8 @@ LINQ sidder i `ListFileNames`: `EnumerateFiles`, `Select`, `Where` og `OrderBy`.
 
 Jeg bruger `fetch` med `async`/`await`, ikke `$.ajax`. Ajax får svaret i en callback. `fetch` returnerer et promise, så samme funktion kan læse JSON eller blob og kun opdatere den del, der ændrede sig.
 
-jQuery lytter i `$(function () { ... })`: klik på `#uploadButton` uploader, klik på et link downloader. Efter upload tilføjer `addFileLink` kun den nye fil.
+jQuery lytter i `$(function () { ... })`: klik på `#uploadButton` uploader, klik på `a.file-link` downloader. `#status` sættes med `.text()`. Listen læses med `#fileList .file-link` og opdateres med `$('#fileList').empty().append()`. Efter upload tilføjer `addFileLink` kun den nye fil.
 
 2.3 `loadFiles` bygger listen i et `DocumentFragment` og sætter den ind én gang. `addFileLink` og `setStatus` genbruges. Kaldene er async `fetch`.
 
-Serveren tjekker tom fil, størrelse og filnavn i `Program.cs`, før den skriver. Klientens tjek er kun til GUI. Navne sættes med `textContent`. `TryResolveFilePath` holder stien inde i `uploads`.
+Serveren tjekker tom fil, størrelse, filnavn og filtype i `Program.cs`, før den skriver. Tilladte typer er `.txt`, `.pdf`, `.doc`, `.docx` og `.csv`. Klientens tjek er kun til GUI. Navne sættes med jQuery `.text()`. `TryResolveFilePath` holder stien inde i `uploads` og afviser andre filtyper.
